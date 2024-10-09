@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/app_name"
+        android:text="@string/random_pussy"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAllCaps="true"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/pussyImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_of_pussy"
+        app:layout_constraintBottom_toTopOf="@+id/pussyBreed"
+        app:layout_constraintTop_toBottomOf="@+id/app_name"
+        tools:src="@tools:sample/avatars" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/pussyImage"
+        app:layout_constraintEnd_toEndOf="@id/pussyImage"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintStart_toStartOf="@id/pussyImage"
+        app:layout_constraintTop_toTopOf="@id/pussyImage" />
+
+    <TextView
+        android:id="@+id/pussyBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/pussy_breed"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/buttonLoadPussy"
+        tools:text="Breed" />
+
+    <Button
+        android:id="@+id/buttonLoadPussy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/next_pussy_button"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

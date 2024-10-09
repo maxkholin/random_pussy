@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pussies</string>
+    <string name="next_pussy_button">Next pussy</string>
+    <string name="pussy_breed">%s</string>
+    <string name="image_of_pussy">Image of pussy</string>
+    <string name="random_pussy">Random Pussy</string>
+    <string name="error_message">Невозможно загрузить данные, возможно отсутсвует подключение к интернету или сервер не отвечает. Попробуйте позже</string>
+    <string name="sadness">Грусть</string>
+</resources>
