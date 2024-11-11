@@ -2,12 +2,15 @@
 agp = "8.6.0"
 coil = "2.2.0"
 converterGson = "2.9.0"
+dagger = "2.52"
+daggerCompiler = "2.52"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+lifecycleViewmodelKtx = "2.8.7"
 material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
@@ -16,8 +19,11 @@ retrofitVersion = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
