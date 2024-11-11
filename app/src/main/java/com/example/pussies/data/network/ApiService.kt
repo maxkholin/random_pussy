@@ -1,15 +1,30 @@
 package com.example.pussies.data.network
 
-import com.example.pussies.domain.Pussy
+import com.example.pussies.data.network.model.PussyContainerDataDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
     @GET(URL)
-    suspend fun loadPussyData(@Query("breed_ids") breed: String): List<Pussy>
+    suspend fun loadPussyData(
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
+        @Query(QUERY_PARAM_BREEDS) breeds: String = getBreedsForSearch()
+    ): PussyContainerDataDto
 
     companion object {
+        private const val URL = "search"
+        private const val QUERY_PARAM_BREEDS = "breed_ids"
+        private const val QUERY_PARAM_API_KEY = "api_key"
+        private const val API_KEY =
+            "live_qHUFyn3OEOZ8SOi9ekebI9qC6OJegiqr678qLTcuLeMTIzSMuXKxhGLMLXfnbd5n"
 
-        private const val URL = "search?api_key=live_qHUFyn3OEOZ8SOi9ekebI9qC6OJegiqr678qLTcuLeMTIzSMuXKxhGLMLXfnbd5n"
+        private fun getBreedsForSearch(): String {
+            val breeds = listOf(
+                "beng", "acur",
+//                "abys", "sfol", "nebe", "tang", "ragd", "raga",
+//                "lape", "sava", "lihu", "bsho", "orie", "munc"
+            )
+            return breeds.joinToString(",")
+        }
     }
 }
