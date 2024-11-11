@@ -1,4 +1,4 @@
-package com.example.pussies
+package com.example.pussies.presentation
 
 import android.os.Bundle
 import android.view.View.GONE
@@ -15,41 +15,34 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.example.pussies.R
+import com.example.pussies.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
 
-    private lateinit var pussyImage: ImageView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var pussyBreed: TextView
-    private lateinit var buttonLoadPussy: Button
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        initViews()
         initAndObserveViewModel()
         loadPussyData()
 
-        buttonLoadPussy.setOnClickListener {
+        binding.buttonLoadPussy.setOnClickListener {
             loadPussyData()
         }
 
-    }
-
-    private fun initViews() {
-        pussyImage = findViewById(R.id.pussyImage)
-        progressBar = findViewById(R.id.progressBar)
-        pussyBreed = findViewById(R.id.pussyBreed)
-        buttonLoadPussy = findViewById(R.id.buttonLoadPussy)
     }
 
     private fun initAndObserveViewModel() {
@@ -62,35 +55,39 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeLoading() {
         viewModel.isLoading.observe(this) { isLoading ->
-            if (isLoading) {
-                progressBar.visibility = VISIBLE
-            } else {
-                progressBar.visibility = GONE
-            }
+            binding.progressBar.visibility = if (isLoading) VISIBLE else GONE
         }
     }
 
     private fun observeErrors() {
         viewModel.isError.observe(this) { isError ->
             if (isError) {
-                pussyImage.setImageResource(R.drawable.error_pussy)
-                pussyBreed.text = getString(R.string.sadness)
-                AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(R.string.error_message)
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .create()
-                    .show()
+                with(binding) {
+                    pussyImage.setImageResource(R.drawable.error_pussy)
+                    pussyBreed.text = getString(R.string.sadness)
+                }
+                showAlertDialog()
             }
         }
     }
 
+    private fun showAlertDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Error")
+            .setMessage(R.string.error_message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
     private fun observePussyModel() {
         viewModel.pussy.observe(this) { pussy ->
-            pussyImage.load(pussy.url)
-            pussyBreed.text = pussy.breeds[0].name
+            with(binding) {
+                pussyImage.load(pussy.url)
+                pussyBreed.text = pussy.breeds[0].name
+            }
         }
     }
 
