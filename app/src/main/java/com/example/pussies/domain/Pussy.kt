@@ -1,6 +1,8 @@
 package com.example.pussies.domain
 
 data class Pussy(
+    val id: String,
+    var isFavorite: Boolean,
     val imageUrl: String,
     val weight: String,
     val breedName: String,
