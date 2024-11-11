@@ -1,6 +1,6 @@
 package com.example.pussies.data.network
 
-import com.example.pussies.data.network.model.PussyContainerDataDto
+import com.example.pussies.data.network.model.PussyInfoDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,7 +9,7 @@ interface ApiService {
     suspend fun loadPussyData(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_BREEDS) breeds: String = getBreedsForSearch()
-    ): PussyContainerDataDto
+    ): List<PussyInfoDto>
 
     companion object {
         private const val URL = "search"
