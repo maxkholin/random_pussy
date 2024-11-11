@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         binding.buttonLoadPussy.setOnClickListener {
             loadPussyData()
         }
+        binding.buttonAddRemoveFavorite.setOnClickListener {
+            viewModel.addRemoveFromFavorite()
+        }
 
     }
 
@@ -81,8 +84,8 @@ class MainActivity : AppCompatActivity() {
     private fun observePussyModel() {
         viewModel.pussy.observe(this) { pussy ->
             with(binding) {
-                pussyImage.load(pussy.url)
-                pussyBreed.text = pussy.breeds[0].name
+                pussyImage.load(pussy.imageUrl)
+                pussyBreed.text = pussy.breedName
             }
         }
     }
