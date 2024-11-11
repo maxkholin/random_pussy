@@ -1,15 +1,18 @@
 package com.example.pussies.data.mapper
 
-import com.example.pussies.data.network.model.PussyDataDto
+import com.example.pussies.data.network.model.PussyInfoDto
 import com.example.pussies.domain.Pussy
 
 class PussyMapper {
 
-    fun mapDtoToDomain(pussy: PussyDataDto): Pussy {
-        val imageUrl = pussy.url
-        val breed = pussy.breedInfo.firstOrNull()
+    fun mapDtoToDomain(pussyDto: PussyInfoDto, isFavorite: Boolean): Pussy {
+        val id = pussyDto.id
+        val imageUrl = pussyDto.url
+        val breed = pussyDto.breedInfo.firstOrNull()
 
         return Pussy(
+            id = id,
+            isFavorite = isFavorite,
             imageUrl = imageUrl,
             weight = breed?.weight?.metric ?: UNKNOWN,
             breedName = breed?.breedName ?: UNKNOWN,
