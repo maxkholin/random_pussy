@@ -1,6 +1,6 @@
-package com.example.pussies
+package com.example.pussies.data.network.model
 
-data class Pussy(
+data class PussyDto(
     val breeds: List<Breed>,
     val id: String,
     val url: String,

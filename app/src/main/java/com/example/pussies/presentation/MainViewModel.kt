@@ -1,10 +1,12 @@
-package com.example.pussies
+package com.example.pussies.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.pussies.domain.Pussy
+import com.example.pussies.data.network.ApiFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -44,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
-                val pussies = RetrofitClient.instance.loadPussyData(getBreedsForSearch())
+                val pussies = ApiFactory.instance.loadPussyData(getBreedsForSearch())
                 if (pussies.isNotEmpty()) {
                     val pussy = pussies[0]
                     _pussy.postValue(pussy)
