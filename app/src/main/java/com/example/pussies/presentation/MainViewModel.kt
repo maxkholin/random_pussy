@@ -1,38 +1,22 @@
 package com.example.pussies.presentation
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pussies.domain.Pussy
+import androidx.lifecycle.ViewModel
+import com.example.pussies.data.mapper.PussyMapper
 import com.example.pussies.data.network.ApiFactory
+import com.example.pussies.domain.Pussy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-fun getBreedsForSearch(): String {
-    val breeds = listOf(
-        "beng",
-        "abys",
-        "sfol",
-        "nebe",
-        "tang",
-        "ragd",
-        "raga",
-        "lape",
-        "sava",
-        "lihu",
-        "bsho",
-        "orie",
-        "munc"
-    )
+private const val TAG = "MyApp"
 
-    return breeds.joinToString(",")
-}
+class MainViewModel(
+//    private val mapper: PussyMapper
+) : ViewModel() {
+    private val mapper = PussyMapper()
 
-private const val TAG = "MainViewModel"
-
-class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
 
@@ -46,9 +30,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
-                val pussies = ApiFactory.instance.loadPussyData(getBreedsForSearch())
-                if (pussies.isNotEmpty()) {
-                    val pussy = pussies[0]
+                val pussyList = ApiFactory.instance.loadPussyData()
+                if (pussyList.isNotEmpty()) {
+                    val pussyDto = pussyList[0]
+                    val pussy = mapper.mapDtoToDomain(pussyDto, true)
+
+                    Log.d(TAG, pussy.catFriendly)
                     _pussy.postValue(pussy)
                 } else {
                     throw Exception("Empty response")
@@ -60,5 +47,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _isLoading.postValue(false)
             }
         }
+    }
+
+    fun addRemoveFromFavorite() {
+
     }
 }
