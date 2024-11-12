@@ -13,7 +13,6 @@ class PussyRepositoryImpl @Inject constructor(
     private val mapper: PussyMapper
 ) : PussyRepository {
 
-
     override suspend fun loadOnePussyData(): Pussy {
         val pussyData = apiService.loadPussyData()
         val pussyDto = pussyData.firstOrNull() ?: throw Exception("Empty response")
