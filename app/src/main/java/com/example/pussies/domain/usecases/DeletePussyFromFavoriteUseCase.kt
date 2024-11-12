@@ -6,7 +6,7 @@ import javax.inject.Inject
 class DeletePussyFromFavoriteUseCase @Inject constructor(
     private val repository: PussyRepository
 ) {
-    operator fun invoke(pussyId: String) {
+    suspend operator fun invoke(pussyId: String) {
         repository.deletePussyFromFavorite(pussyId)
     }
 }

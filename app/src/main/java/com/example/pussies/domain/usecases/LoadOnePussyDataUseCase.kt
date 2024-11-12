@@ -7,7 +7,7 @@ class LoadOnePussyDataUseCase @Inject constructor(
     private val repository: PussyRepository
 ) {
 
-    operator fun invoke() {
+    suspend operator fun invoke() {
         repository.loadOnePussyData()
     }
 }

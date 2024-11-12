@@ -2,13 +2,11 @@ package com.example.pussies.domain
 
 interface PussyRepository {
 
-    fun loadOnePussyData()
+    suspend fun loadOnePussyData(): Pussy
 
-    fun insertPussyToFavorite(pussy: Pussy)
+    suspend fun insertPussyToFavorite(pussy: Pussy)
 
-    fun deletePussyFromFavorite(pussyId: String)
+    suspend fun deletePussyFromFavorite(pussyId: String)
 
-    fun getDetailedInfoForOneFavoritePussy(pussyId: String): Pussy
-
-    fun getAllPussiesFromFavorite(): List<Pussy>
+    suspend fun getAllPussiesFromFavorite(): List<Pussy>
 }

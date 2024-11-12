@@ -7,7 +7,7 @@ import javax.inject.Inject
 class InsertPussyToFavoriteUseCase @Inject constructor(
     private val repository: PussyRepository
 ) {
-    operator fun invoke(pussy: Pussy) {
+    suspend operator fun invoke(pussy: Pussy) {
         repository.insertPussyToFavorite(pussy)
     }
 }

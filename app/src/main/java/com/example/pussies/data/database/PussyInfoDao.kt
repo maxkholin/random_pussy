@@ -9,14 +9,14 @@ import androidx.room.Query
 interface PussyInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPussyToFavorite(pussyDbModel: PussyDbModel)
+    suspend fun insertPussy(pussyDbModel: PussyDbModel)
 
     @Query("DELETE FROM pussies WHERE id = :pussyId")
-    fun deletePussyFromFavorite(pussyId: String)
+    suspend fun deletePussy(pussyId: String)
 
     @Query("SELECT * FROM pussies WHERE id = :pussyId")
-    fun getDetailedInfoForOneFavoritePussy(pussyId: String): PussyDbModel
+    suspend fun getPussyById(pussyId: String): PussyDbModel?
 
     @Query("SELECT * FROM pussies")
-    fun getAllPussiesFromFavorite(): List<PussyDbModel>
+    suspend fun getAllPussies(): List<PussyDbModel>
 }

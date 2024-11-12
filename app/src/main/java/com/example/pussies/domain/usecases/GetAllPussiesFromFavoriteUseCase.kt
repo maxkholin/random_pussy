@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetAllPussiesFromFavoriteUseCase @Inject constructor(
     private val repository: PussyRepository
 ) {
-    operator fun invoke(): List<Pussy> {
+    suspend operator fun invoke(): List<Pussy> {
         return repository.getAllPussiesFromFavorite()
     }
 }
