@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.databinding.ActivityMainBinding
+import com.example.pussies.presentation.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {

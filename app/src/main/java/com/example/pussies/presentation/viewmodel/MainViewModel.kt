@@ -1,30 +1,19 @@
-package com.example.pussies.presentation
+package com.example.pussies.presentation.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pussies.data.database.AppDatabase
-import com.example.pussies.data.mapper.PussyMapper
-import com.example.pussies.data.network.ApiFactory
-import com.example.pussies.data.repository.PussyRepositoryImpl
 import com.example.pussies.domain.Pussy
+import com.example.pussies.domain.PussyRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-private const val TAG = "MyApp"
-
-class MainViewModel(
-    application: Application
-) : AndroidViewModel(application) {
-
-    private val repository = PussyRepositoryImpl(
-        apiService = ApiFactory.instance,
-        database = AppDatabase.getInstance(application),
-        mapper = PussyMapper()
-    )
+class MainViewModel @Inject constructor(
+    private val repository: PussyRepository
+) : ViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
@@ -61,7 +50,7 @@ class MainViewModel(
             currentStatus?.let {
                 if (currentStatus == false) {
                     pussy.value?.let { repository.insertPussyToFavorite(it) }
-                }  else {
+                } else {
                     pussy.value?.id?.let { repository.deletePussyFromFavorite(it) }
                 }
                 _pussy.postValue(pussy.value?.copy(isFavorite = !currentStatus))
