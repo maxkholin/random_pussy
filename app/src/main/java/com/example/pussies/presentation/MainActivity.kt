@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        initAndObserveViewModel()
-        loadPussyData()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        observeViewModel()
 
         binding.buttonLoadPussy.setOnClickListener {
             loadPussyData()
@@ -44,9 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initAndObserveViewModel() {
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
+    private fun observeViewModel() {
         observeLoading()
         observeErrors()
         observePussyModel()
