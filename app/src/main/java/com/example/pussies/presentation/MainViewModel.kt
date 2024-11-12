@@ -1,11 +1,14 @@
 package com.example.pussies.presentation
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.pussies.data.database.AppDatabase
 import com.example.pussies.data.mapper.PussyMapper
 import com.example.pussies.data.network.ApiFactory
+import com.example.pussies.data.repository.PussyRepositoryImpl
 import com.example.pussies.domain.Pussy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,9 +16,15 @@ import kotlinx.coroutines.withContext
 private const val TAG = "MyApp"
 
 class MainViewModel(
-//    private val mapper: PussyMapper
-) : ViewModel() {
-    private val mapper = PussyMapper()
+    application: Application
+
+) : AndroidViewModel(application) {
+
+    private val repository = PussyRepositoryImpl(
+        apiService = ApiFactory.instance,
+        database = AppDatabase.getInstance(application),
+        mapper = PussyMapper()
+    )
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
@@ -30,16 +39,10 @@ class MainViewModel(
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
-                val pussyList = ApiFactory.instance.loadPussyData()
-                if (pussyList.isNotEmpty()) {
-                    val pussyDto = pussyList[0]
-                    val pussy = mapper.mapDtoToDomain(pussyDto, true)
-
-                    Log.d(TAG, pussy.catFriendly)
-                    _pussy.postValue(pussy)
-                } else {
-                    throw Exception("Empty response")
-                }
+                val pussy = repository.loadOnePussyData()
+                Log.d(TAG, pussy.catFriendly)
+                Log.d(TAG, pussy.isFavorite.toString())
+                _pussy.postValue(pussy)
             } catch (e: Exception) {
                 Log.d(TAG, e.toString())
                 _isError.postValue(true)
@@ -49,7 +52,17 @@ class MainViewModel(
         }
     }
 
-    fun addRemoveFromFavorite() {
-
+    suspend fun toggleFavoriteStatus() {
+        withContext(Dispatchers.IO) {
+            val currentStatus = pussy.value?.isFavorite
+            if (currentStatus != null) {
+                if (currentStatus == false) {
+                    pussy.value?.let { repository.insertPussyToFavorite(it) }
+                }  else {
+                    pussy.value?.id?.let { repository.deletePussyFromFavorite(it) }
+                }
+                _pussy.postValue(pussy.value?.copy(isFavorite = !currentStatus))
+            }
+        }
     }
 }

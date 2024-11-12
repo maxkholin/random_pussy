@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             loadPussyData()
         }
         binding.buttonAddRemoveFavorite.setOnClickListener {
-            viewModel.addRemoveFromFavorite()
+            toggleFavoriteStatus()
         }
 
     }
@@ -83,16 +83,36 @@ class MainActivity : AppCompatActivity() {
 
     private fun observePussyModel() {
         viewModel.pussy.observe(this) { pussy ->
+
             with(binding) {
                 pussyImage.load(pussy.imageUrl)
+
                 pussyBreed.text = pussy.breedName
+
+                buttonAddRemoveFavorite.setImageResource(
+                    getButtonFavoriteImage(pussy.isFavorite)
+                )
             }
+        }
+    }
+
+    private fun getButtonFavoriteImage(isFavorite: Boolean): Int {
+        return if (isFavorite) {
+            R.drawable.cat_heart_active
+        } else {
+            R.drawable.cat_heart_non_active
         }
     }
 
     private fun loadPussyData() {
         lifecycleScope.launch {
             viewModel.loadPussyData()
+        }
+    }
+
+    private fun toggleFavoriteStatus() {
+        lifecycleScope.launch {
+            viewModel.toggleFavoriteStatus()
         }
     }
 }
