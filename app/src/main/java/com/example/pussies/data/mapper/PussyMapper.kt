@@ -3,8 +3,9 @@ package com.example.pussies.data.mapper
 import com.example.pussies.data.database.PussyDbModel
 import com.example.pussies.data.network.model.PussyDto
 import com.example.pussies.domain.Pussy
+import javax.inject.Inject
 
-class PussyMapper {
+class PussyMapper @Inject constructor() {
 
     fun mapDtoToDomain(pussyDto: PussyDto, isFavorite: Boolean): Pussy {
         val id = pussyDto.id
