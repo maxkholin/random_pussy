@@ -13,23 +13,33 @@ class PussyRepositoryImpl @Inject constructor(
     private val mapper: PussyMapper
 ): PussyRepository {
 
-    override fun loadOnePussyData() {
-        TODO("Not yet implemented")
+    private val pussyInfoDao = database.pussyInfoDao()
+
+    override suspend fun loadOnePussyData(): Pussy {
+        val pussyData = apiService.loadPussyData()
+
+        if (pussyData.isNotEmpty()) {
+            val pussyDto = pussyData[0]
+            val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
+            return mapper.mapDtoToDomain(pussyDto, isFavorite)
+        } else {
+            throw Exception("Empty response")
+        }
     }
 
-    override fun insertPussyToFavorite(pussy: Pussy) {
-        TODO("Not yet implemented")
+    override suspend fun insertPussyToFavorite(pussy: Pussy) {
+        val pussyDbModel = mapper.mapDomainToDb(pussy)
+        pussyInfoDao.insertPussy(pussyDbModel)
     }
 
-    override fun deletePussyFromFavorite(pussyId: String) {
-        TODO("Not yet implemented")
+    override suspend fun deletePussyFromFavorite(pussyId: String) {
+        pussyInfoDao.deletePussy(pussyId)
     }
 
-    override fun getDetailedInfoForOneFavoritePussy(pussyId: String): Pussy {
-        TODO("Not yet implemented")
+    override suspend fun getAllPussiesFromFavorite(): List<Pussy> {
+        val list = pussyInfoDao.getAllPussies()
+        return mapper.mapListDbToDomain(list)
     }
 
-    override fun getAllPussiesFromFavorite(): List<Pussy> {
-        TODO("Not yet implemented")
-    }
+
 }
