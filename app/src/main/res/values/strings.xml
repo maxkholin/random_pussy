@@ -7,4 +7,6 @@
     <string name="error_message">Невозможно загрузить данные, возможно отсутсвует подключение к интернету или сервер не отвечает. Попробуйте позже</string>
     <string name="sadness">Грусть</string>
     <string name="add_remove_to_favorite">add/remove to favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
