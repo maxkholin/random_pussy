@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.domain.Pussy
-import com.example.pussies.domain.PussyRepository
+import com.example.pussies.domain.usecases.PussyUseCasesFacade
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val repository: PussyRepository
+    private val useCases: PussyUseCasesFacade
 ) : ViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
-                val pussy = repository.loadOnePussyData()
+                val pussy = useCases.loadOnePussyDataUseCase()
                 _pussy.postValue(pussy)
             } catch (e: Exception) {
                 _isError.postValue(true)
@@ -49,9 +49,9 @@ class MainViewModel @Inject constructor(
             val currentStatus = pussy.value?.isFavorite
             currentStatus?.let {
                 if (currentStatus == false) {
-                    pussy.value?.let { repository.insertPussyToFavorite(it) }
+                    pussy.value?.let { useCases.insertPussyToFavoriteUseCase(it) }
                 } else {
-                    pussy.value?.id?.let { repository.deletePussyFromFavorite(it) }
+                    pussy.value?.id?.let { useCases.deletePussyFromFavoriteUseCase(it) }
                 }
                 _pussy.postValue(pussy.value?.copy(isFavorite = !currentStatus))
             }
