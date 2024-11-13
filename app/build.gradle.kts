@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -47,6 +48,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
 
     implementation(libs.coil)
 
