@@ -34,5 +34,4 @@ class PussyRepositoryImpl @Inject constructor(
         return mapper.mapListDbToDomain(list)
     }
 
-
 }
