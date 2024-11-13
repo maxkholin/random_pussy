@@ -14,16 +14,28 @@ import coil.load
 import com.example.pussies.R
 import com.example.pussies.databinding.ActivityMainBinding
 import com.example.pussies.presentation.viewmodel.MainViewModel
+import com.example.pussies.presentation.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewModel: MainViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as PussyApp).appComponent
+    }
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -33,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         observeViewModel()
 
         binding.buttonLoadPussy.setOnClickListener {
