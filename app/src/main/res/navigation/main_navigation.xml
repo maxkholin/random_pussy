@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/randomPussyFragment">
+
+    <fragment
+        android:id="@+id/randomPussyFragment"
+        android:name="com.example.pussies.presentation.fragments.RandomPussyFragment"
+        android:label="fragment_random_pussy"
+        tools:layout="@layout/fragment_random_pussy" />
+    <fragment
+        android:id="@+id/detailedInfoFragment"
+        android:name="com.example.pussies.presentation.fragments.DetailedInfoFragment"
+        android:label="fragment_detailed_info"
+        tools:layout="@layout/fragment_detailed_info" />
+    <fragment
+        android:id="@+id/favoritePussiesFragment"
+        android:name="com.example.pussies.presentation.fragments.FavoritePussiesFragment"
+        android:label="fragment_favorite_pussies"
+        tools:layout="@layout/fragment_favorite_pussies" />
+</navigation>

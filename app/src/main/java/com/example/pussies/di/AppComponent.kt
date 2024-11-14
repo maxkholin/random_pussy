@@ -1,7 +1,7 @@
 package com.example.pussies.di
 
 import android.app.Application
-import com.example.pussies.presentation.MainActivity
+import com.example.pussies.presentation.fragments.RandomPussyFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -19,5 +19,5 @@ interface AppComponent {
         fun create(@BindsInstance application: Application): AppComponent
     }
 
-    fun inject(activity: MainActivity)
+    fun inject(fragment: RandomPussyFragment)
 }
