@@ -1,5 +1,7 @@
 package com.example.pussies.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.pussies.data.database.PussyInfoDao
 import com.example.pussies.data.mapper.PussyMapper
 import com.example.pussies.data.network.ApiService
@@ -29,9 +31,9 @@ class PussyRepositoryImpl @Inject constructor(
         pussyInfoDao.deletePussy(pussyId)
     }
 
-    override suspend fun getAllPussiesFromFavorite(): List<Pussy> {
-        val list = pussyInfoDao.getAllPussies()
-        return mapper.mapListDbToDomain(list)
-    }
-
+    override fun getAllPussiesFromFavorite(): LiveData<List<Pussy>> =
+        pussyInfoDao.getAllPussies()
+            .map { list ->
+                list.map(mapper::mapDbToDomain)
+            }
 }

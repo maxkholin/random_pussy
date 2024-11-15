@@ -94,15 +94,8 @@ class PussyMapper @Inject constructor() {
         )
     }
 
-    fun mapListDbToDomain(list: List<PussyDbModel>): List<Pussy> {
-        return list.map {
-            mapDbToDomain(it)
-        }
-    }
-
     companion object {
 
         private const val UNKNOWN = "Unknown"
     }
-
 }
