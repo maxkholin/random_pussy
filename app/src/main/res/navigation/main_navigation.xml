@@ -9,7 +9,14 @@
         android:id="@+id/randomPussyFragment"
         android:name="com.example.pussies.presentation.fragments.RandomPussyFragment"
         android:label="fragment_random_pussy"
-        tools:layout="@layout/fragment_random_pussy" />
+        tools:layout="@layout/fragment_random_pussy" >
+        <action
+            android:id="@+id/action_randomPussyFragment_to_favoritePussiesFragment"
+            app:destination="@id/favoritePussiesFragment" />
+        <action
+            android:id="@+id/action_randomPussyFragment_to_detailedInfoFragment"
+            app:destination="@id/detailedInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailedInfoFragment"
         android:name="com.example.pussies.presentation.fragments.DetailedInfoFragment"
@@ -19,5 +26,12 @@
         android:id="@+id/favoritePussiesFragment"
         android:name="com.example.pussies.presentation.fragments.FavoritePussiesFragment"
         android:label="fragment_favorite_pussies"
-        tools:layout="@layout/fragment_favorite_pussies" />
+        tools:layout="@layout/fragment_favorite_pussies" >
+        <action
+            android:id="@+id/action_favoritePussiesFragment_to_randomPussyFragment"
+            app:destination="@id/randomPussyFragment" />
+        <action
+            android:id="@+id/action_favoritePussiesFragment_to_detailedInfoFragment"
+            app:destination="@id/detailedInfoFragment" />
+    </fragment>
 </navigation>
