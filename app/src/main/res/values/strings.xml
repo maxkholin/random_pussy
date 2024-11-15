@@ -5,8 +5,10 @@
     <string name="image_of_pussy">Image of pussy</string>
     <string name="random_pussy">Random Pussy</string>
     <string name="error_message">Невозможно загрузить данные, возможно отсутсвует подключение к интернету или сервер не отвечает. Попробуйте позже</string>
-    <string name="sadness">Грусть</string>
+    <string name="sadness">Печаль</string>
     <string name="add_remove_to_favorite">add/remove to favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite">Избранное</string>
+    <string name="to_home">To random pussy screen</string>
+    <string name="home_button">home button</string>
+    <string name="remove_from_favorite">remove from favorite</string>
 </resources>
