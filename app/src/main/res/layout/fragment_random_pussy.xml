@@ -22,29 +22,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/button_favorites"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/favorite"
-            android:src="@drawable/error_pussy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_name" />
-
-        <ImageView
-            android:id="@+id/button_toggle_favorite"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/add_remove_to_favorite"
-            android:src="@drawable/cat_heart_non_active"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_name"
-            tools:src="@drawable/cat_heart_non_active" />
-
-        <ImageView
             android:id="@+id/iv_pussy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,6 +31,28 @@
             app:layout_constraintBottom_toTopOf="@+id/pussy_breed"
             app:layout_constraintTop_toBottomOf="@+id/app_name"
             tools:src="@drawable/error_pussy" />
+
+        <ImageView
+            android:id="@+id/button_favorites"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/favorite"
+            android:src="@drawable/favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_name" />
+
+        <ImageView
+            android:id="@+id/button_toggle_favorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/add_remove_to_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_name"
+            tools:src="@drawable/not_active_heart" />
 
         <ProgressBar
             android:id="@+id/progressBar"

@@ -130,9 +130,9 @@ class RandomPussyFragment : Fragment() {
 
     private fun getButtonFavoriteImage(isFavorite: Boolean): Int {
         return if (isFavorite) {
-            R.drawable.cat_heart_active
+            R.drawable.acive_heart
         } else {
-            R.drawable.cat_heart_non_active
+            R.drawable.not_active_heart
         }
     }
 
