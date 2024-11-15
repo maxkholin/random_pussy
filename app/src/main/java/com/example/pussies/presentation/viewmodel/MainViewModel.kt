@@ -24,6 +24,8 @@ class MainViewModel @Inject constructor(
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
 
+    val pussyList : LiveData<List<Pussy>> = useCases.getPussyListFromFavoriteUseCase()
+
     init {
         viewModelScope.launch {
             loadPussyData()
@@ -31,6 +33,8 @@ class MainViewModel @Inject constructor(
     }
 
     suspend fun loadPussyData() {
+        /* TODO в чем разница если я сделаю  withContext(Dispatchers.IO) или viewModelScope.launch
+        *   ниже в методе removeFromFavorites()*/
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
@@ -55,6 +59,12 @@ class MainViewModel @Inject constructor(
                 }
                 _pussy.postValue(pussy.value?.copy(isFavorite = !currentStatus))
             }
+        }
+    }
+
+    suspend fun removeFromFavorites(pussyId: String) {
+        viewModelScope.launch {
+            useCases.deletePussyFromFavoriteUseCase(pussyId)
         }
     }
 }
