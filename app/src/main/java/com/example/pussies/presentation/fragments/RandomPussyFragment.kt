@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.databinding.FragmentRandomPussyBinding
@@ -27,13 +28,13 @@ class RandomPussyFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private var _binding : FragmentRandomPussyBinding? = null
-    private val binding: FragmentRandomPussyBinding
-        get() = _binding ?: throw RuntimeException("FragmentRandomPussyBinding is null")
-
     private val component by lazy {
         (requireActivity().application as PussyApp).appComponent
     }
+
+    private var _binding: FragmentRandomPussyBinding? = null
+    private val binding: FragmentRandomPussyBinding
+        get() = _binding ?: throw RuntimeException("FragmentRandomPussyBinding is null")
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,13 +54,28 @@ class RandomPussyFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         observeViewModel()
 
-        binding.buttonLoadPussy.setOnClickListener {
-            loadPussyData()
-        }
-        binding.buttonAddRemoveFavorite.setOnClickListener {
-            toggleFavoriteStatus()
-        }
+        setupButtonsClickListener()
+    }
 
+    private fun setupButtonsClickListener() {
+        with(binding) {
+            buttonLoadPussy.setOnClickListener {
+                loadPussyData()
+            }
+            buttonToggleFavorite.setOnClickListener {
+                toggleFavoriteStatus()
+            }
+
+            buttonFavorites.setOnClickListener {
+                launchFavoriteFragment()
+            }
+        }
+    }
+
+    private fun launchFavoriteFragment() {
+        findNavController().navigate(
+            R.id.action_randomPussyFragment_to_favoritePussiesFragment
+        )
     }
 
     private fun observeViewModel() {
@@ -78,7 +94,7 @@ class RandomPussyFragment : Fragment() {
         viewModel.isError.observe(viewLifecycleOwner) { isError ->
             if (isError) {
                 with(binding) {
-                    pussyImage.setImageResource(R.drawable.error_pussy)
+                    ivPussy.setImageResource(R.drawable.error_pussy)
                     pussyBreed.text = getString(R.string.sadness)
                 }
                 showAlertDialog()
@@ -101,11 +117,11 @@ class RandomPussyFragment : Fragment() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
 
             with(binding) {
-                pussyImage.load(pussy.imageUrl)
+                ivPussy.load(pussy.imageUrl)
 
                 pussyBreed.text = pussy.breedName
 
-                buttonAddRemoveFavorite.setImageResource(
+                buttonToggleFavorite.setImageResource(
                     getButtonFavoriteImage(pussy.isFavorite)
                 )
             }
@@ -131,7 +147,6 @@ class RandomPussyFragment : Fragment() {
             viewModel.toggleFavoriteStatus()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
