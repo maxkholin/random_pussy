@@ -1,5 +1,7 @@
 package com.example.pussies.domain
 
+import androidx.lifecycle.LiveData
+
 interface PussyRepository {
 
     suspend fun loadOnePussyData(): Pussy
@@ -8,5 +10,5 @@ interface PussyRepository {
 
     suspend fun deletePussyFromFavorite(pussyId: String)
 
-    suspend fun getAllPussiesFromFavorite(): List<Pussy>
+    fun getAllPussiesFromFavorite(): LiveData<List<Pussy>>
 }

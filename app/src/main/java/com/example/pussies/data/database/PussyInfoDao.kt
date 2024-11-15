@@ -1,5 +1,6 @@
 package com.example.pussies.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,5 +19,5 @@ interface PussyInfoDao {
     suspend fun getPussyById(pussyId: String): PussyDbModel?
 
     @Query("SELECT * FROM pussies")
-    suspend fun getAllPussies(): List<PussyDbModel>
+    fun getAllPussies(): LiveData< List<PussyDbModel>>
 }
