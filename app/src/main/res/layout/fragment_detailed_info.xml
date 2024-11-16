@@ -15,13 +15,19 @@
             android:orientation="vertical"
             android:paddingHorizontal="8dp">
 
+            <ImageView
+                android:id="@+id/pussyImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null" />
+
             <TextView
                 android:id="@+id/breedName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"
-                android:text="@string/breed_name_s"
                 android:layout_marginBottom="16dp"
+                android:text="@string/breed_name_s"
+                android:textSize="36sp"
                 tools:text="Breed Name: " />
 
             <TextView
