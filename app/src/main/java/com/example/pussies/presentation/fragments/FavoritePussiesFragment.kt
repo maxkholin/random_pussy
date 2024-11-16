@@ -9,18 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.pussies.R
 import com.example.pussies.databinding.FragmentFavoritePussiesBinding
+import com.example.pussies.domain.Pussy
 import com.example.pussies.presentation.PussyApp
 import com.example.pussies.presentation.adapter.PussyAdapter
-import com.example.pussies.presentation.viewmodel.MainViewModel
+import com.example.pussies.presentation.viewmodel.FavoritesViewModel
 import com.example.pussies.presentation.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavoritePussiesFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: FavoritesViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -49,12 +49,22 @@ class FavoritePussiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PussyAdapter { pussyId ->
-            removePussyFromFavorite(pussyId)
+        val removeFromFavorite: (pussyId: String) -> Unit = {
+            removePussyFromFavorite(it)
         }
+
+        val launchDetailedInfoFragment: (pussy: Pussy) -> Unit = {
+            findNavController()
+                .navigate(
+                    FavoritePussiesFragmentDirections
+                        .actionFavoritePussiesFragmentToDetailedInfoFragment(it)
+                )
+        }
+
+        val adapter = PussyAdapter(removeFromFavorite, launchDetailedInfoFragment)
         binding.favoritePussies.adapter = adapter
 
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class]
+        viewModel = ViewModelProvider(this, viewModelFactory)[FavoritesViewModel::class]
         observeViewModel(adapter)
         setupButtonsClickListener()
     }
@@ -66,7 +76,11 @@ class FavoritePussiesFragment : Fragment() {
     }
 
     private fun launchRandomPussyFragment() {
-        findNavController().navigate(R.id.action_favoritePussiesFragment_to_randomPussyFragment)
+        findNavController()
+            .navigate(
+                FavoritePussiesFragmentDirections
+                    .actionFavoritePussiesFragmentToRandomPussyFragment()
+            )
     }
 
     private fun observeViewModel(adapter: PussyAdapter) {
