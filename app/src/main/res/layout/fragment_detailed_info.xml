@@ -19,7 +19,9 @@
                 android:id="@+id/pussyImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@null" />
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@null"
+                tools:src="@drawable/error_pussy" />
 
             <TextView
                 android:id="@+id/breedName"
@@ -35,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 tools:text="@string/pussy_description_example" />
 
             <TextView
@@ -46,6 +48,7 @@
                 android:drawableEnd="@drawable/ic_arrow_down"
                 android:drawablePadding="16dp"
                 android:focusable="true"
+                android:text="@string/characteristic"
                 android:textSize="36sp"
                 tools:text="Characteristic" />
 
@@ -55,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 tools:visibility="visible">
 
                 <TextView
@@ -63,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/weight_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Weight: " />
 
                 <TextView
@@ -71,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/temperament_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Temperament: " />
 
                 <TextView
@@ -79,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/origin_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Origin: " />
 
                 <TextView
@@ -87,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/life_span_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Life Span: " />
 
                 <TextView
@@ -95,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/indoor_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Indoor: " />
 
                 <TextView
@@ -103,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/child_friendly_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Child Friendly: " />
 
                 <TextView
@@ -111,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cat_friendly_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Cat Friendly: " />
 
                 <TextView
@@ -119,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dog_friendly_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Dog Friendly: " />
 
                 <TextView
@@ -127,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stranger_friendly_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Stranger Friendly: " />
 
                 <TextView
@@ -135,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/adaptability_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Adaptability: " />
 
                 <TextView
@@ -143,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/affection_level_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Affection Level: " />
 
                 <TextView
@@ -151,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/energy_level_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Energy Level: " />
 
                 <TextView
@@ -159,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/health_issues_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Health Issues: " />
 
                 <TextView
@@ -167,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/intelligence_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Intelligence: " />
 
                 <TextView
@@ -175,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/social_needs_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Social Needs: " />
 
 
@@ -184,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/vocalisation_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Vocalisation: " />
 
                 <TextView
@@ -192,7 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wikipedia_url_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Wikipedia URL: " />
 
                 <TextView
@@ -200,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hypoallergenic_s"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     tools:text="Hypoallergenic: " />
 
             </LinearLayout>
