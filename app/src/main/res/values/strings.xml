@@ -11,4 +11,25 @@
     <string name="to_home">To random pussy screen</string>
     <string name="home_button">home button</string>
     <string name="remove_from_favorite">remove from favorite</string>
+    <string name="favorites">Favorites</string>
+    <string name="pussy_description_example">The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and love both people and other animals.</string>
+    <string name="breed_name_s">Breed Name: %s</string>
+    <string name="weight_s">Weight: %s</string>
+    <string name="temperament_s">Temperament: %s</string>
+    <string name="origin_s">Origin: %s</string>
+    <string name="life_span_s">Life Span: %s</string>
+    <string name="indoor_s">Indoor: %s</string>
+    <string name="child_friendly_s">Child Friendly: %s</string>
+    <string name="cat_friendly_s">Cat Friendly: %s</string>
+    <string name="dog_friendly_s">Dog Friendly: %s</string>
+    <string name="stranger_friendly_s">Stranger Friendly: %s</string>
+    <string name="adaptability_s">Adaptability: %s</string>
+    <string name="affection_level_s">Affection Level: %s</string>
+    <string name="energy_level_s">Energy Level: %s</string>
+    <string name="health_issues_s">Health Issues: %s</string>
+    <string name="intelligence_s">Intelligence: %s</string>
+    <string name="social_needs_s">Social Needs: %s</string>
+    <string name="vocalisation_s">Vocalisation: %s</string>
+    <string name="wikipedia_url_s">Wikipedia URL: %s</string>
+    <string name="hypoallergenic_s">Hypoallergenic: %s</string>
 </resources>
