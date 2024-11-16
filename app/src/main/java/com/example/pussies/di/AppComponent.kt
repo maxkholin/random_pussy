@@ -1,6 +1,7 @@
 package com.example.pussies.di
 
 import android.app.Application
+import com.example.pussies.presentation.fragments.DetailedInfoFragment
 import com.example.pussies.presentation.fragments.FavoritePussiesFragment
 import com.example.pussies.presentation.fragments.RandomPussyFragment
 import dagger.BindsInstance
@@ -22,4 +23,5 @@ interface AppComponent {
 
     fun inject(fragment: RandomPussyFragment)
     fun inject(fragment: FavoritePussiesFragment)
+    fun inject(fragment: DetailedInfoFragment)
 }
