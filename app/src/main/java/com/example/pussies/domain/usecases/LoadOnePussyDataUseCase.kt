@@ -9,6 +9,6 @@ class LoadOnePussyDataUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): Pussy {
-       return repository.loadOnePussyData()
+        return repository.loadOnePussyData()
     }
 }

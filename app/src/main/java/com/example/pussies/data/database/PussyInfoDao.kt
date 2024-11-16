@@ -19,5 +19,5 @@ interface PussyInfoDao {
     suspend fun getPussyById(pussyId: String): PussyDbModel?
 
     @Query("SELECT * FROM pussies")
-    fun getAllPussies(): LiveData< List<PussyDbModel>>
+    fun getAllPussies(): LiveData<List<PussyDbModel>>
 }

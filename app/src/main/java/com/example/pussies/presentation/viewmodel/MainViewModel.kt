@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
 
-    val pussyList : LiveData<List<Pussy>> = useCases.getPussyListFromFavoriteUseCase()
+    val pussyList: LiveData<List<Pussy>> = useCases.getPussyListFromFavoriteUseCase()
 
     init {
         viewModelScope.launch {
