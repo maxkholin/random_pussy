@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class RandomPussyViewModel @Inject constructor(
     private val useCases: PussyUseCasesFacade
 ) : ViewModel() {
 
@@ -23,8 +23,6 @@ class MainViewModel @Inject constructor(
 
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
-
-    val pussyList: LiveData<List<Pussy>> = useCases.getPussyListFromFavoriteUseCase()
 
     init {
         viewModelScope.launch {
@@ -62,9 +60,4 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    suspend fun removeFromFavorites(pussyId: String) {
-        viewModelScope.launch {
-            useCases.deletePussyFromFavoriteUseCase(pussyId)
-        }
-    }
 }
