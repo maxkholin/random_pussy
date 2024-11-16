@@ -9,7 +9,8 @@ import com.example.pussies.databinding.ItemFavoritePussyBinding
 import com.example.pussies.domain.Pussy
 
 class PussyAdapter(
-    private val onDeleteClick: (pussyId: String) -> Unit
+    private val onDeleteClick: (pussyId: String) -> Unit,
+    private val onImageClick: ((pussy: Pussy) -> Unit)
 ) : ListAdapter<Pussy, PussyViewHolder>(PussyDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PussyViewHolder {
@@ -30,6 +31,9 @@ class PussyAdapter(
             pussyBreed.text = pussy.breedName
             removeFavorite.setOnClickListener {
                 onDeleteClick(pussy.id)
+            }
+            pussyImage.setOnClickListener {
+                onImageClick(pussy)
             }
         }
     }
