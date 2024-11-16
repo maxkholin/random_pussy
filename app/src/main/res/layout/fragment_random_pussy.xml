@@ -13,7 +13,8 @@
         <TextView
             android:id="@+id/app_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
+            android:gravity="center"
             android:padding="8dp"
             android:text="@string/random_pussy"
             android:textAlignment="center"
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:adjustViewBounds="true"
+            android:elevation="8dp"
             android:contentDescription="@string/image_of_pussy"
             app:layout_constraintBottom_toTopOf="@+id/pussy_breed"
             app:layout_constraintTop_toBottomOf="@+id/app_name"
@@ -39,9 +41,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/favorite"
-            android:src="@drawable/favorites"
+            android:src="@drawable/ic_favorites"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/button_toggle_favorite"
@@ -52,7 +54,7 @@
             android:contentDescription="@string/add_remove_to_favorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_name"
-            tools:src="@drawable/not_active_heart" />
+            tools:src="@drawable/ic_not_active_heart" />
 
         <ProgressBar
             android:id="@+id/progressBar"
