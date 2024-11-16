@@ -1,5 +1,9 @@
 package com.example.pussies.domain
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Pussy(
     val id: String,
     var isFavorite: Boolean,
@@ -24,6 +28,6 @@ data class Pussy(
     val vocalisation: String,
     val wikipediaUrl: String,
     val hypoallergenic: String
-)
+) : Parcelable
 
 
