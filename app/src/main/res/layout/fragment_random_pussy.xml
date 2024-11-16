@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_pussy"
+            android:id="@+id/pussyImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -61,10 +61,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/iv_pussy"
-            app:layout_constraintEnd_toEndOf="@id/iv_pussy"
-            app:layout_constraintStart_toStartOf="@id/iv_pussy"
-            app:layout_constraintTop_toTopOf="@id/iv_pussy"
+            app:layout_constraintBottom_toBottomOf="@id/pussyImage"
+            app:layout_constraintEnd_toEndOf="@id/pussyImage"
+            app:layout_constraintStart_toStartOf="@id/pussyImage"
+            app:layout_constraintTop_toTopOf="@id/pussyImage"
             tools:visibility="visible" />
 
         <TextView
