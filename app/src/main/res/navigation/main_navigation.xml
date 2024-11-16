@@ -21,7 +21,11 @@
         android:id="@+id/detailedInfoFragment"
         android:name="com.example.pussies.presentation.fragments.DetailedInfoFragment"
         android:label="fragment_detailed_info"
-        tools:layout="@layout/fragment_detailed_info" />
+        tools:layout="@layout/fragment_detailed_info">
+        <argument
+            android:name="pussy"
+            app:argType="com.example.pussies.domain.Pussy" />
+    </fragment>
     <fragment
         android:id="@+id/favoritePussiesFragment"
         android:name="com.example.pussies.presentation.fragments.FavoritePussiesFragment"
