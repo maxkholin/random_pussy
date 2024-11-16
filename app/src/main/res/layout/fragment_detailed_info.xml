@@ -5,10 +5,202 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.DetailedInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DETAILED INFO" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
+
+            <TextView
+                android:id="@+id/breedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"
+                android:text="@string/breed_name_s"
+                android:layout_marginBottom="16dp"
+                tools:text="Breed Name: " />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="28sp"
+                tools:text="@string/pussy_description_example" />
+
+            <TextView
+                android:id="@+id/characteristic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:textSize="36sp"
+                tools:text="Characteristic" />
+
+            <LinearLayout
+                android:id="@+id/detailsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight_s"
+                    android:textSize="28sp"
+                    tools:text="Weight: " />
+
+                <TextView
+                    android:id="@+id/temperament"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/temperament_s"
+                    android:textSize="28sp"
+                    tools:text="Temperament: " />
+
+                <TextView
+                    android:id="@+id/origin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/origin_s"
+                    android:textSize="28sp"
+                    tools:text="Origin: " />
+
+                <TextView
+                    android:id="@+id/lifeSpan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/life_span_s"
+                    android:textSize="28sp"
+                    tools:text="Life Span: " />
+
+                <TextView
+                    android:id="@+id/indoor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/indoor_s"
+                    android:textSize="28sp"
+                    tools:text="Indoor: " />
+
+                <TextView
+                    android:id="@+id/childFriendly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/child_friendly_s"
+                    android:textSize="28sp"
+                    tools:text="Child Friendly: " />
+
+                <TextView
+                    android:id="@+id/catFriendly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_friendly_s"
+                    android:textSize="28sp"
+                    tools:text="Cat Friendly: " />
+
+                <TextView
+                    android:id="@+id/dogFriendly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dog_friendly_s"
+                    android:textSize="28sp"
+                    tools:text="Dog Friendly: " />
+
+                <TextView
+                    android:id="@+id/strangerFriendly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stranger_friendly_s"
+                    android:textSize="28sp"
+                    tools:text="Stranger Friendly: " />
+
+                <TextView
+                    android:id="@+id/adaptability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/adaptability_s"
+                    android:textSize="28sp"
+                    tools:text="Adaptability: " />
+
+                <TextView
+                    android:id="@+id/affectionLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/affection_level_s"
+                    android:textSize="28sp"
+                    tools:text="Affection Level: " />
+
+                <TextView
+                    android:id="@+id/energyLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/energy_level_s"
+                    android:textSize="28sp"
+                    tools:text="Energy Level: " />
+
+                <TextView
+                    android:id="@+id/healthIssues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/health_issues_s"
+                    android:textSize="28sp"
+                    tools:text="Health Issues: " />
+
+                <TextView
+                    android:id="@+id/intelligence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intelligence_s"
+                    android:textSize="28sp"
+                    tools:text="Intelligence: " />
+
+                <TextView
+                    android:id="@+id/socialNeeds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/social_needs_s"
+                    android:textSize="28sp"
+                    tools:text="Social Needs: " />
+
+
+                <TextView
+                    android:id="@+id/vocalisation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vocalisation_s"
+                    android:textSize="28sp"
+                    tools:text="Vocalisation: " />
+
+                <TextView
+                    android:id="@+id/wikipediaUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wikipedia_url_s"
+                    android:textSize="28sp"
+                    tools:text="Wikipedia URL: " />
+
+                <TextView
+                    android:id="@+id/hypoallergenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hypoallergenic_s"
+                    android:textSize="28sp"
+                    tools:text="Hypoallergenic: " />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
