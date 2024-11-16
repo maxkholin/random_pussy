@@ -57,7 +57,7 @@ class DetailedInfoFragment : Fragment() {
             breedName.text = String.format(getString(R.string.breed_name_s), pussy.breedName)
             description.text = pussy.description
             weight.text = String.format(getString(R.string.weight_s), pussy.weight)
-            temperament.text = String.format(getString(R.string.temperament_s), temperament)
+            temperament.text = String.format(getString(R.string.temperament_s), pussy.temperament)
             origin.text = String.format(getString(R.string.origin_s), pussy.origin)
             lifeSpan.text = String.format(getString(R.string.life_span_s), pussy.lifeSpan)
             indoor.text = String.format(getString(R.string.indoor_s), pussy.indoor)
