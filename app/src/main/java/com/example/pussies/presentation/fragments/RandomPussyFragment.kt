@@ -15,15 +15,16 @@ import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.databinding.FragmentRandomPussyBinding
+import com.example.pussies.domain.Pussy
 import com.example.pussies.presentation.PussyApp
-import com.example.pussies.presentation.viewmodel.MainViewModel
+import com.example.pussies.presentation.viewmodel.RandomPussyViewModel
 import com.example.pussies.presentation.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RandomPussyFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: RandomPussyViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -51,13 +52,13 @@ class RandomPussyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[RandomPussyViewModel::class.java]
         observeViewModel()
 
-        setupButtonsClickListener()
+        setupClickListeners()
     }
 
-    private fun setupButtonsClickListener() {
+    private fun setupClickListeners() {
         with(binding) {
             buttonLoadPussy.setOnClickListener {
                 loadPussyData()
@@ -74,7 +75,13 @@ class RandomPussyFragment : Fragment() {
 
     private fun launchFavoriteFragment() {
         findNavController().navigate(
-            R.id.action_randomPussyFragment_to_favoritePussiesFragment
+            RandomPussyFragmentDirections.actionRandomPussyFragmentToFavoritePussiesFragment()
+        )
+    }
+
+    private fun launchDetailedInfoFragment(pussy: Pussy) {
+        findNavController().navigate(
+            RandomPussyFragmentDirections.actionRandomPussyFragmentToDetailedInfoFragment(pussy)
         )
     }
 
@@ -94,7 +101,7 @@ class RandomPussyFragment : Fragment() {
         viewModel.isError.observe(viewLifecycleOwner) { isError ->
             if (isError) {
                 with(binding) {
-                    ivPussy.setImageResource(R.drawable.error_pussy)
+                    pussyImage.setImageResource(R.drawable.error_pussy)
                     pussyBreed.text = getString(R.string.sadness)
                 }
                 showAlertDialog()
@@ -117,13 +124,17 @@ class RandomPussyFragment : Fragment() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
 
             with(binding) {
-                ivPussy.load(pussy.imageUrl)
+                pussyImage.load(pussy.imageUrl)
 
                 pussyBreed.text = pussy.breedName
 
                 buttonToggleFavorite.setImageResource(
                     getButtonFavoriteImage(pussy.isFavorite)
                 )
+
+                pussyImage.setOnClickListener {
+                    launchDetailedInfoFragment(pussy)
+                }
             }
         }
     }
