@@ -32,7 +32,7 @@ class RandomPussyViewModel @Inject constructor(
 
     suspend fun loadPussyData() {
         /* TODO в чем разница если я сделаю  withContext(Dispatchers.IO) или viewModelScope.launch
-        *   ниже в методе removeFromFavorites()*/
+        *   в FavoritesViewModel в методе removeFromFavorites()*/
         withContext(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
