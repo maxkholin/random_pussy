@@ -33,4 +33,5 @@
     <string name="wikipedia_url_s">Wikipedia URL: %s</string>
     <string name="hypoallergenic_s">Hypoallergenic: %s</string>
     <string name="characteristic">Characteristic</string>
+    <string name="detailed_info">detailed info</string>
 </resources>
