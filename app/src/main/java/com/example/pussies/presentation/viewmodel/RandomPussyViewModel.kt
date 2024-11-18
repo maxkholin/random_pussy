@@ -46,6 +46,10 @@ class RandomPussyViewModel @Inject constructor(
         }
     }
 
+    fun resetError() {
+        _isError.postValue(false)
+    }
+
     suspend fun toggleFavoriteStatus() {
         withContext(Dispatchers.IO) {
             val currentStatus = pussy.value?.isFavorite

@@ -2,6 +2,7 @@ package com.example.pussies.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -112,9 +113,12 @@ class RandomPussyFragment : Fragment() {
                 with(binding) {
                     pussyImage.setImageResource(R.drawable.error_pussy)
                     pussyBreed.text = getString(R.string.sadness)
+                    buttonToggleFavorite.setImageResource(R.drawable.ic_not_active_heart)
                 }
                 showAlertDialog()
             }
+
+            viewModel.resetError()
         }
     }
 
@@ -141,6 +145,7 @@ class RandomPussyFragment : Fragment() {
                     getButtonFavoriteImage(pussy.isFavorite)
                 )
             }
+            Log.d("Pussy", pussy.isFavorite.toString())
         }
     }
 
