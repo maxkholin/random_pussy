@@ -20,9 +20,10 @@ interface ApiService {
 
         private fun getBreedsForSearch(): String {
             val breeds = listOf(
+                "bsho",
                 "beng", "acur",
-//                "abys", "sfol", "nebe", "tang", "ragd", "raga",
-//                "lape", "sava", "lihu", "bsho", "orie", "munc"
+                "abys", "sfol", "nebe", "tang", "ragd", "raga",
+                "lape", "sava", "lihu",  "orie", "munc"
             )
             return breeds.joinToString(",")
         }
