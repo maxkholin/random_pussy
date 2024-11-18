@@ -76,11 +76,7 @@ class FavoritePussiesFragment : Fragment() {
     }
 
     private fun launchRandomPussyFragment() {
-        findNavController()
-            .navigate(
-                FavoritePussiesFragmentDirections
-                    .actionFavoritePussiesFragmentToRandomPussyFragment()
-            )
+        findNavController().popBackStack()
     }
 
     private fun observeViewModel(adapter: PussyAdapter) {
