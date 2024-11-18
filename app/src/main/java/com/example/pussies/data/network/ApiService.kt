@@ -23,7 +23,7 @@ interface ApiService {
                 "bsho",
                 "beng", "acur",
                 "abys", "sfol", "nebe", "tang", "ragd", "raga",
-                "lape", "sava", "lihu",  "orie", "munc"
+                "lape", "sava", "lihu", "orie", "munc"
             )
             return breeds.joinToString(",")
         }
