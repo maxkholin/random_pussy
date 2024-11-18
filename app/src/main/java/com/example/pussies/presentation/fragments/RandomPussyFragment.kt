@@ -63,12 +63,21 @@ class RandomPussyFragment : Fragment() {
             buttonLoadPussy.setOnClickListener {
                 loadPussyData()
             }
+
             buttonToggleFavorite.setOnClickListener {
                 toggleFavoriteStatus()
             }
 
             buttonFavorites.setOnClickListener {
                 launchFavoriteFragment()
+            }
+
+            pussyImage.setOnClickListener {
+                viewModel.pussy.value.let {
+                    if (it != null) {
+                        launchDetailedInfoFragment(it)
+                    }
+                }
             }
         }
     }
@@ -131,14 +140,13 @@ class RandomPussyFragment : Fragment() {
                 buttonToggleFavorite.setImageResource(
                     getButtonFavoriteImage(pussy.isFavorite)
                 )
-
-                pussyImage.setOnClickListener {
-                    launchDetailedInfoFragment(pussy)
-                }
             }
         }
     }
 
+    /**
+     * TODO в другом фрагменте также юзаю этот метод
+     */
     private fun getButtonFavoriteImage(isFavorite: Boolean): Int {
         return if (isFavorite) {
             R.drawable.ic_active_heart
