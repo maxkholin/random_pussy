@@ -31,6 +31,10 @@ class PussyRepositoryImpl @Inject constructor(
         pussyInfoDao.deletePussy(pussyId)
     }
 
+    override suspend fun checkPussy(pussyId: String): Boolean {
+        return pussyInfoDao.getPussyById(pussyId) != null
+    }
+
     override fun getAllPussiesFromFavorite(): LiveData<List<Pussy>> =
         pussyInfoDao.getAllPussies()
             .map { list ->

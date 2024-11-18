@@ -6,5 +6,6 @@ class PussyUseCasesFacade @Inject constructor(
     val deletePussyFromFavoriteUseCase: DeletePussyFromFavoriteUseCase,
     val insertPussyToFavoriteUseCase: InsertPussyToFavoriteUseCase,
     val loadOnePussyDataUseCase: LoadOnePussyDataUseCase,
-    val getPussyListFromFavoriteUseCase: GetPussyListFromFavoriteUseCase
+    val getPussyListFromFavoriteUseCase: GetPussyListFromFavoriteUseCase,
+    val checkFavoritePussyUseCase: CheckFavoritePussyUseCase
 )

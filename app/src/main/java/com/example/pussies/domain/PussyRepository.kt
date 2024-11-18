@@ -10,5 +10,7 @@ interface PussyRepository {
 
     suspend fun deletePussyFromFavorite(pussyId: String)
 
+    suspend fun checkPussy(pussyId: String): Boolean
+
     fun getAllPussiesFromFavorite(): LiveData<List<Pussy>>
 }
