@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.databinding.FragmentDetailedInfoBinding
+import com.example.pussies.domain.Pussy
 import com.example.pussies.presentation.PussyApp
 import com.example.pussies.presentation.viewmodel.DetailedInfoViewModel
 import com.example.pussies.presentation.viewmodel.ViewModelFactory
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailedInfoFragment : Fragment() {
@@ -39,7 +43,8 @@ class DetailedInfoFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailedInfoBinding.inflate(inflater, container, false)
@@ -49,10 +54,41 @@ class DetailedInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailedInfoViewModel::class]
+        val pussy = args.pussy
+        initAndSetupViewModel(pussy)
+        observeViewModel()
+        setupClickListeners()
+    }
 
+    private fun initAndSetupViewModel(pussy: Pussy) {
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailedInfoViewModel::class]
+        viewModel.setPussy(pussy)
+    }
+
+    private fun observeViewModel() {
+        viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
+            setupCharacteristic(pussy)
+
+            binding.buttonToggleFavorite.setImageResource(
+                getButtonFavoriteImage(pussy.isFavorite)
+            )
+        }
+
+        viewModel.statsIsOpen.observe(viewLifecycleOwner) { isOpen ->
+            binding.statsLinearLayout.visibility = if (isOpen) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
+            binding.stats.setCompoundDrawablesWithIntrinsicBounds(
+                0, 0, getButtonShowMore(isOpen), 0
+            )
+        }
+    }
+
+    private fun setupCharacteristic(pussy: Pussy) {
         with(binding) {
-            val pussy = args.pussy
             pussyImage.load(pussy.imageUrl)
             breedName.text = String.format(getString(R.string.breed_name_s), pussy.breedName)
             description.text = pussy.description
@@ -84,6 +120,53 @@ class DetailedInfoFragment : Fragment() {
             hypoallergenic.text =
                 String.format(getString(R.string.hypoallergenic_s), pussy.hypoallergenic)
         }
+    }
+
+    private fun getButtonFavoriteImage(isFavorite: Boolean): Int {
+        return if (isFavorite) {
+            R.drawable.ic_active_heart
+        } else {
+            R.drawable.ic_not_active_heart
+        }
+    }
+
+    private fun getButtonShowMore(isOpen: Boolean): Int {
+        return if (isOpen) {
+            R.drawable.ic_arrow_up
+        } else {
+            R.drawable.ic_arrow_down
+        }
+    }
+
+    private fun setupClickListeners() {
+        setupButtonShowMore()
+        setupButtonFavorite()
+        setupButtonBack()
+    }
+
+    private fun setupButtonShowMore() {
+        binding.stats.setOnClickListener {
+            viewModel.toggleStats()
+        }
+
+    }
+
+    private fun setupButtonFavorite() {
+        binding.buttonToggleFavorite.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.toggleFavoriteStatus()
+            }
+        }
+    }
+
+    private fun setupButtonBack() {
+        binding.back.setOnClickListener {
+            launchPastFragment()
+        }
+    }
+
+    private fun launchPastFragment() {
+        findNavController().popBackStack()
     }
 
     override fun onDestroyView() {
