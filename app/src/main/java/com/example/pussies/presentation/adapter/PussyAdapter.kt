@@ -25,7 +25,6 @@ class PussyAdapter(
 
     override fun onBindViewHolder(holder: PussyViewHolder, position: Int) {
         val pussy = getItem(position)
-        Log.d("PussyAdapter", "Binding item at position $position: $pussy")
         with(holder.binding) {
             pussyImage.load(pussy.imageUrl)
             pussyBreed.text = pussy.breedName
