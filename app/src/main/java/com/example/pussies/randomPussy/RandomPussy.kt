@@ -1,29 +1,24 @@
-package com.example.pussies.presentation.fragments
+package com.example.pussies.randomPussy
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
-import com.example.pussies.databinding.FragmentRandomPussyBinding
-import com.example.pussies.domain.Pussy
-import com.example.pussies.presentation.PussyApp
-import com.example.pussies.presentation.viewmodel.RandomPussyViewModel
-import com.example.pussies.presentation.viewmodel.ViewModelFactory
-import kotlinx.coroutines.launch
+import com.example.pussies.base.domain.Pussy
+import com.example.pussies.base.presentation.PussyApp
+import com.example.pussies.base.presentation.viewmodel.ViewModelFactory
+import com.example.pussies.databinding.RandomPussyBinding
 import javax.inject.Inject
 
-class RandomPussyFragment : Fragment() {
+class RandomPussy : Fragment() {
 
     private lateinit var viewModel: RandomPussyViewModel
 
@@ -34,8 +29,8 @@ class RandomPussyFragment : Fragment() {
         (requireActivity().application as PussyApp).appComponent
     }
 
-    private var _binding: FragmentRandomPussyBinding? = null
-    private val binding: FragmentRandomPussyBinding
+    private var _binding: RandomPussyBinding? = null
+    private val binding: RandomPussyBinding
         get() = _binding ?: throw RuntimeException("FragmentRandomPussyBinding is null")
 
     override fun onAttach(context: Context) {
@@ -47,7 +42,7 @@ class RandomPussyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRandomPussyBinding.inflate(inflater, container, false)
+        _binding = RandomPussyBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -62,18 +57,18 @@ class RandomPussyFragment : Fragment() {
     private fun setupClickListeners() {
         with(binding) {
             buttonLoadPussy.setOnClickListener {
-                loadPussyData()
+                viewModel.loadPussyData()
             }
 
-            buttonToggleFavorite.setOnClickListener {
-                toggleFavoriteStatus()
+            cardPussy.toggleFavorite.setOnClickListener {
+                viewModel.toggleFavoriteStatus()
             }
 
-            buttonFavorites.setOnClickListener {
+            favorites.setOnClickListener {
                 launchFavoriteFragment()
             }
 
-            pussyImage.setOnClickListener {
+            cardPussy.pussyImage.setOnClickListener {
                 viewModel.pussy.value.let {
                     if (it != null) {
                         launchDetailedInfoFragment(it)
@@ -85,13 +80,13 @@ class RandomPussyFragment : Fragment() {
 
     private fun launchFavoriteFragment() {
         findNavController().navigate(
-            RandomPussyFragmentDirections.actionRandomPussyFragmentToFavoritePussiesFragment()
+            RandomPussyDirections.toFavorites()
         )
     }
 
     private fun launchDetailedInfoFragment(pussy: Pussy) {
         findNavController().navigate(
-            RandomPussyFragmentDirections.actionRandomPussyFragmentToDetailedInfoFragment(pussy)
+            RandomPussyDirections.toDetailedInfo(pussy)
         )
     }
 
@@ -103,17 +98,23 @@ class RandomPussyFragment : Fragment() {
 
     private fun observeLoading() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) VISIBLE else GONE
+            if (isLoading) {
+                binding.skeletonLayout.showSkeleton()
+                binding.buttonLoadPussy.isEnabled = false
+            } else {
+                binding.skeletonLayout.showOriginal()
+                binding.buttonLoadPussy.isEnabled = true
+            }
         }
     }
 
     private fun observeErrors() {
         viewModel.isError.observe(viewLifecycleOwner) { isError ->
             if (isError) {
-                with(binding) {
+                with(binding.cardPussy) {
                     pussyImage.setImageResource(R.drawable.error_pussy)
-                    pussyBreed.text = getString(R.string.sadness)
-                    buttonToggleFavorite.setImageResource(R.drawable.ic_not_active_heart)
+                    pussyBreed.text = getString(R.string.random_pussy_sadness)
+                    toggleFavorite.setImageResource(R.drawable.ic_non_active_heart)
                 }
                 showAlertDialog()
             }
@@ -125,7 +126,7 @@ class RandomPussyFragment : Fragment() {
     private fun showAlertDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("Error")
-            .setMessage(R.string.error_message)
+            .setMessage(R.string.random_pussy_error_message)
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
             }
@@ -135,13 +136,13 @@ class RandomPussyFragment : Fragment() {
 
     private fun observePussyModel() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
-
-            with(binding) {
+            with(binding.cardPussy) {
+                Log.d("Pussy", "in Observe")
                 pussyImage.load(pussy.imageUrl)
 
                 pussyBreed.text = pussy.breedName
 
-                buttonToggleFavorite.setImageResource(
+                toggleFavorite.setImageResource(
                     getButtonFavoriteImage(pussy.isFavorite)
                 )
             }
@@ -156,21 +157,14 @@ class RandomPussyFragment : Fragment() {
         return if (isFavorite) {
             R.drawable.ic_active_heart
         } else {
-            R.drawable.ic_not_active_heart
+            R.drawable.ic_non_active_heart
         }
     }
 
-    private fun loadPussyData() {
-        lifecycleScope.launch {
-            viewModel.loadPussyData()
-        }
-    }
-
-    private fun toggleFavoriteStatus() {
-        lifecycleScope.launch {
-            viewModel.toggleFavoriteStatus()
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.checkFavorite()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
