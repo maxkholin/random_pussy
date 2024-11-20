@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".randomPussy.RandomPussy">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@color/dark_lavender"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/random_pussy_title"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titleTextSize"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/iconsMargin"
+            android:layout_marginTop="@dimen/iconsMargin"
+            android:contentDescription="@string/random_pussy_favorites"
+            android:src="@drawable/ic_favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.faltenreich.skeletonlayout.SkeletonLayout
+        android:id="@+id/skeletonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/buttonLoadPussy"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <include
+            android:id="@+id/cardPussy"
+            layout="@layout/card_pussy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.faltenreich.skeletonlayout.SkeletonLayout>
+
+
+    <Button
+        android:id="@+id/buttonLoadPussy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/nextPussyButtonMargin"
+        android:text="@string/random_pussy_next_pussy"
+        android:textAllCaps="true"
+        android:textSize="@dimen/nextPussyButtonTextSize"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
