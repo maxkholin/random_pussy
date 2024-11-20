@@ -3,39 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/randomPussyFragment">
+    app:startDestination="@id/randomPussy">
 
     <fragment
-        android:id="@+id/randomPussyFragment"
-        android:name="com.example.pussies.presentation.fragments.RandomPussyFragment"
+        android:id="@+id/randomPussy"
+        android:name="com.example.pussies.randomPussy.RandomPussy"
         android:label="fragment_random_pussy"
-        tools:layout="@layout/fragment_random_pussy">
+        tools:layout="@layout/random_pussy">
         <action
-            android:id="@+id/action_randomPussyFragment_to_favoritePussiesFragment"
-            app:destination="@id/favoritePussiesFragment" />
+            android:id="@+id/toFavorites"
+            app:destination="@id/favorites" />
         <action
-            android:id="@+id/action_randomPussyFragment_to_detailedInfoFragment"
-            app:destination="@id/detailedInfoFragment" />
+            android:id="@+id/toDetailedInfo"
+            app:destination="@id/detailedInfo" />
     </fragment>
     <fragment
-        android:id="@+id/detailedInfoFragment"
-        android:name="com.example.pussies.presentation.fragments.DetailedInfoFragment"
+        android:id="@+id/detailedInfo"
+        android:name="com.example.pussies.detailedInfo.DetailedInfo"
         android:label="fragment_detailed_info"
-        tools:layout="@layout/fragment_detailed_info">
+        tools:layout="@layout/detailed_info">
         <argument
             android:name="pussy"
-            app:argType="com.example.pussies.domain.Pussy" />
+            app:argType="com.example.pussies.base.domain.Pussy" />
     </fragment>
     <fragment
-        android:id="@+id/favoritePussiesFragment"
-        android:name="com.example.pussies.presentation.fragments.FavoritePussiesFragment"
+        android:id="@+id/favorites"
+        android:name="com.example.pussies.favorites.presentation.Favorites"
         android:label="fragment_favorite_pussies"
-        tools:layout="@layout/fragment_favorite_pussies">
+        tools:layout="@layout/favorite_pussies">
         <action
-            android:id="@+id/action_favoritePussiesFragment_to_randomPussyFragment"
-            app:destination="@id/randomPussyFragment" />
+            android:id="@+id/toRandomPussy"
+            app:destination="@id/randomPussy" />
         <action
-            android:id="@+id/action_favoritePussiesFragment_to_detailedInfoFragment"
-            app:destination="@id/detailedInfoFragment" />
+            android:id="@+id/toDetailedInfo"
+            app:destination="@id/detailedInfo" />
     </fragment>
 </navigation>
