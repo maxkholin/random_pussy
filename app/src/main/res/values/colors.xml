@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_grey">#FF999999</color>
+    <color name="dark_lavender2">#734F96</color>
+    <color name="dark_lavender">#856798</color>
+    <color name="expand_more_less_button">#FF000000</color>
 </resources>
