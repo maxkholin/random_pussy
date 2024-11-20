@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.Pussies" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorOnSurface">@color/white</item>
     </style>
+
+    <style name="Theme.Pussies" parent="Base.Theme.Pussies" />
 </resources>
