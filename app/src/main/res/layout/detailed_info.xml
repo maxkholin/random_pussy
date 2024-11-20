@@ -4,95 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.DetailedInfoFragment">
+    tools:context=".detailedInfo.DetailedInfo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="72dp">
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@color/dark_lavender"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/detailed_info"
+            android:text="@string/detailed_info_title"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titleTextSize"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/home_button"
-            android:src="@drawable/ic_home"
-            app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintTop_toTopOf="@id/title" />
-
-        <ImageView
-            android:id="@+id/button_toggle_favorite"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/add_remove_to_favorite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_not_active_heart" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/iconsMargin"
+            android:layout_marginTop="@dimen/iconsMargin"
+            android:contentDescription="@string/detailed_info_back"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="@dimen/topBarHeight"
         app:layout_constraintTop_toTopOf="@id/title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="vertical"
-            android:paddingHorizontal="8dp">
+            android:paddingHorizontal="@dimen/LLHorizontalPadding">
 
-            <ImageView
-                android:id="@+id/pussyImage"
+            <include
+                android:id="@+id/cardPussy"
+                layout="@layout/card_pussy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="@null"
-                tools:src="@drawable/error_pussy" />
+                android:layout_marginVertical="@dimen/cardVerticalMargin" />
 
             <TextView
-                android:id="@+id/breedName"
+                android:id="@+id/breedDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="@string/breed_name_s"
-                android:textSize="36sp"
-                tools:text="Breed Name: " />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textSize="24sp"
-                tools:text="@string/pussy_description_example" />
+                android:layout_marginBottom="@dimen/breedDescriptionBottomPadding"
+                android:textSize="@dimen/commonTextSize"
+                tools:text="@string/detailed_info_pussy_description_example" />
 
             <TextView
                 android:id="@+id/stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:drawablePadding="16dp"
-                android:focusable="true"
-                android:text="@string/characteristic"
-                android:textSize="36sp"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="@string/detailed_info_characteristic"
+                android:textAllCaps="true"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/commonTextSize"
+                app:drawableEndCompat="@drawable/ic_expand_more"
+                tools:ignore="UseCompoundDrawables"
                 tools:text="Characteristic" />
 
             <LinearLayout
@@ -100,128 +83,126 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:visibility="visible"
-                tools:visibility="visible">
+                android:padding="@dimen/statsLLPadding">
 
                 <TextView
                     android:id="@+id/weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/weight_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_weight_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Weight: " />
 
                 <TextView
                     android:id="@+id/temperament"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/temperament_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_temperament_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Temperament: " />
 
                 <TextView
                     android:id="@+id/origin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/origin_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_origin_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Origin: " />
 
                 <TextView
                     android:id="@+id/lifeSpan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/life_span_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_life_span_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Life Span: " />
 
                 <TextView
                     android:id="@+id/indoor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/indoor_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_indoor_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Indoor: " />
 
                 <TextView
                     android:id="@+id/childFriendly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/child_friendly_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_child_friendly_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Child Friendly: " />
 
                 <TextView
                     android:id="@+id/catFriendly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cat_friendly_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_cat_friendly_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Cat Friendly: " />
 
                 <TextView
                     android:id="@+id/dogFriendly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dog_friendly_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_dog_friendly_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Dog Friendly: " />
 
                 <TextView
                     android:id="@+id/strangerFriendly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/stranger_friendly_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_stranger_friendly_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Stranger Friendly: " />
 
                 <TextView
                     android:id="@+id/adaptability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/adaptability_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_adaptability_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Adaptability: " />
 
                 <TextView
                     android:id="@+id/affectionLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/affection_level_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_affection_level_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Affection Level: " />
 
                 <TextView
                     android:id="@+id/energyLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/energy_level_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_energy_level_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Energy Level: " />
 
                 <TextView
                     android:id="@+id/healthIssues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/health_issues_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_health_issues_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Health Issues: " />
 
                 <TextView
                     android:id="@+id/intelligence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/intelligence_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_intelligence_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Intelligence: " />
 
                 <TextView
                     android:id="@+id/socialNeeds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/social_needs_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_social_needs_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Social Needs: " />
 
 
@@ -229,24 +210,24 @@
                     android:id="@+id/vocalisation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/vocalisation_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_vocalisation_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Vocalisation: " />
 
                 <TextView
                     android:id="@+id/wikipediaUrl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wikipedia_url_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_wikipedia_url_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Wikipedia URL: " />
 
                 <TextView
                     android:id="@+id/hypoallergenic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/hypoallergenic_s"
-                    android:textSize="24sp"
+                    android:text="@string/detailed_info_hypoallergenic_s"
+                    android:textSize="@dimen/commonTextSize"
                     tools:text="Hypoallergenic: " />
 
             </LinearLayout>
