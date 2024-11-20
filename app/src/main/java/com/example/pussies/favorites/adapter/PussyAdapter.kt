@@ -1,11 +1,12 @@
-package com.example.pussies.presentation.adapter
+package com.example.pussies.favorites.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import coil.load
-import com.example.pussies.databinding.ItemFavoritePussyBinding
-import com.example.pussies.domain.Pussy
+import com.example.pussies.R
+import com.example.pussies.base.domain.Pussy
+import com.example.pussies.databinding.CardPussyBinding
 
 class PussyAdapter(
     private val onDeleteClick: (pussyId: String) -> Unit,
@@ -13,7 +14,7 @@ class PussyAdapter(
 ) : ListAdapter<Pussy, PussyViewHolder>(PussyDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PussyViewHolder {
-        val binding = ItemFavoritePussyBinding.inflate(
+        val binding = CardPussyBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -27,7 +28,8 @@ class PussyAdapter(
         with(holder.binding) {
             pussyImage.load(pussy.imageUrl)
             pussyBreed.text = pussy.breedName
-            removeFavorite.setOnClickListener {
+            toggleFavorite.setImageResource(R.drawable.ic_broken_heart)
+            toggleFavorite.setOnClickListener {
                 onDeleteClick(pussy.id)
             }
             pussyImage.setOnClickListener {
