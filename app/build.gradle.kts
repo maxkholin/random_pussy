@@ -65,6 +65,8 @@ dependencies {
     implementation (libs.dagger)
     kapt (libs.dagger.compiler)
 
+    implementation (libs.skeletonlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
