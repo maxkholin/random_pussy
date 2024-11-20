@@ -1,4 +1,4 @@
-package com.example.pussies.presentation.viewmodel
+package com.example.pussies.base.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,6 +1,6 @@
-package com.example.pussies.di
+package com.example.pussies.base.di
 
-import com.example.pussies.data.network.ApiService
+import com.example.pussies.base.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

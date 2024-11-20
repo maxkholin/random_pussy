@@ -1,6 +1,6 @@
-package com.example.pussies.data.network
+package com.example.pussies.base.data.network
 
-import com.example.pussies.data.network.model.PussyDto
+import com.example.pussies.base.data.network.model.PussyDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

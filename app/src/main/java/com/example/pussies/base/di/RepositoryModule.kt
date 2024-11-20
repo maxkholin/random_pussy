@@ -1,7 +1,7 @@
-package com.example.pussies.di
+package com.example.pussies.base.di
 
-import com.example.pussies.data.repository.PussyRepositoryImpl
-import com.example.pussies.domain.PussyRepository
+import com.example.pussies.base.data.repository.PussyRepositoryImpl
+import com.example.pussies.base.domain.PussyRepository
 import dagger.Binds
 import dagger.Module
 

@@ -1,4 +1,4 @@
-package com.example.pussies.di
+package com.example.pussies.base.di
 
 import android.app.Application
 import com.example.pussies.detailedInfo.DetailedInfo

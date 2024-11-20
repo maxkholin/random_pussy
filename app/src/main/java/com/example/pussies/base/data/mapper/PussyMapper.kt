@@ -1,8 +1,8 @@
-package com.example.pussies.data.mapper
+package com.example.pussies.base.data.mapper
 
-import com.example.pussies.data.database.PussyDbModel
-import com.example.pussies.data.network.model.PussyDto
-import com.example.pussies.domain.Pussy
+import com.example.pussies.base.data.database.PussyDbModel
+import com.example.pussies.base.data.network.model.PussyDto
+import com.example.pussies.base.domain.Pussy
 import javax.inject.Inject
 
 class PussyMapper @Inject constructor() {

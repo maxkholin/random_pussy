@@ -1,6 +1,6 @@
-package com.example.pussies.domain.usecases
+package com.example.pussies.base.domain.usecases
 
-import com.example.pussies.domain.PussyRepository
+import com.example.pussies.base.domain.PussyRepository
 import javax.inject.Inject
 
 class DeletePussyFromFavoriteUseCase @Inject constructor(

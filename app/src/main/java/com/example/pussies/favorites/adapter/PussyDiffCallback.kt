@@ -1,7 +1,7 @@
-package com.example.pussies.presentation.adapter
+package com.example.pussies.favorites.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.pussies.domain.Pussy
+import com.example.pussies.base.domain.Pussy
 
 object PussyDiffCallback : DiffUtil.ItemCallback<Pussy>() {
     override fun areItemsTheSame(oldItem: Pussy, newItem: Pussy): Boolean {

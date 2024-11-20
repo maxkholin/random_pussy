@@ -1,4 +1,4 @@
-package com.example.pussies.data.network.model
+package com.example.pussies.base.data.network.model
 
 import com.google.gson.annotations.SerializedName
 

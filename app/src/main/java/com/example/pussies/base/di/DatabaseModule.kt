@@ -1,8 +1,8 @@
-package com.example.pussies.di
+package com.example.pussies.base.di
 
 import android.app.Application
-import com.example.pussies.data.database.AppDatabase
-import com.example.pussies.data.database.PussyInfoDao
+import com.example.pussies.base.data.database.AppDatabase
+import com.example.pussies.base.data.database.PussyInfoDao
 import dagger.Module
 import dagger.Provides
 

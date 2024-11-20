@@ -1,4 +1,4 @@
-package com.example.pussies.data.database
+package com.example.pussies.base.data.database
 
 import android.content.Context
 import androidx.room.Database

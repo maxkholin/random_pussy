@@ -1,17 +1,18 @@
-package com.example.pussies.data.database
+package com.example.pussies.base.domain
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "pussies")
-data class PussyDbModel(
-    @PrimaryKey val id: String,
+@Parcelize
+data class Pussy(
+    val id: String,
+    var isFavorite: Boolean,
     val imageUrl: String,
+    val description: String,
     val weight: String,
     val breedName: String,
     val temperament: String,
     val origin: String,
-    val description: String,
     val lifeSpan: String,
     val indoor: String,
     val adaptability: String,
@@ -27,5 +28,6 @@ data class PussyDbModel(
     val vocalisation: String,
     val wikipediaUrl: String,
     val hypoallergenic: String
-)
+) : Parcelable
+
 

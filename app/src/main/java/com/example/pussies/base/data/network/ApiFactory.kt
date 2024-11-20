@@ -1,4 +1,4 @@
-package com.example.pussies.data.network
+package com.example.pussies.base.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
