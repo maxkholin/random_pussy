@@ -1,4 +1,4 @@
-package com.example.pussies.data.database
+package com.example.pussies.base.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -16,7 +16,7 @@ interface PussyInfoDao {
     suspend fun deletePussy(pussyId: String)
 
     @Query("SELECT * FROM pussies WHERE id = :pussyId")
-    suspend fun getPussyById(pussyId: String): PussyDbModel?
+    fun getPussyById(pussyId: String): LiveData<PussyDbModel>
 
     @Query("SELECT * FROM pussies")
     fun getAllPussies(): LiveData<List<PussyDbModel>>

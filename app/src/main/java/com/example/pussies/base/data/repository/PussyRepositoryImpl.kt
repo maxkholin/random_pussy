@@ -1,12 +1,13 @@
-package com.example.pussies.data.repository
+package com.example.pussies.base.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.pussies.data.database.PussyInfoDao
-import com.example.pussies.data.mapper.PussyMapper
-import com.example.pussies.data.network.ApiService
-import com.example.pussies.domain.Pussy
-import com.example.pussies.domain.PussyRepository
+import com.example.pussies.base.data.database.PussyDbModel
+import com.example.pussies.base.data.database.PussyInfoDao
+import com.example.pussies.base.data.mapper.PussyMapper
+import com.example.pussies.base.data.network.ApiService
+import com.example.pussies.base.domain.Pussy
+import com.example.pussies.base.domain.PussyRepository
 import javax.inject.Inject
 
 class PussyRepositoryImpl @Inject constructor(
@@ -18,7 +19,7 @@ class PussyRepositoryImpl @Inject constructor(
     override suspend fun loadOnePussyData(): Pussy {
         val pussyData = apiService.loadPussyData()
         val pussyDto = pussyData.firstOrNull() ?: throw Exception("Empty response")
-        val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
+        val isFavorite = pussyInfoDao.getPussyById(pussyDto.id).value != null
         return mapper.mapDtoToDomain(pussyDto, isFavorite)
     }
 
@@ -31,8 +32,8 @@ class PussyRepositoryImpl @Inject constructor(
         pussyInfoDao.deletePussy(pussyId)
     }
 
-    override suspend fun checkPussy(pussyId: String): Boolean {
-        return pussyInfoDao.getPussyById(pussyId) != null
+    override fun getPussyById(pussyId: String): PussyDbModel? {
+        return pussyInfoDao.getPussyById(pussyId).value
     }
 
     override fun getAllPussiesFromFavorite(): LiveData<List<Pussy>> =
