@@ -1,7 +1,6 @@
 package com.example.pussies.base.domain
 
 import androidx.lifecycle.LiveData
-import com.example.pussies.base.data.database.PussyDbModel
 
 interface PussyRepository {
 
@@ -11,7 +10,7 @@ interface PussyRepository {
 
     suspend fun deletePussyFromFavorite(pussyId: String)
 
-    fun getPussyById(pussyId: String): PussyDbModel?
+    suspend fun checkPussyById(pussyId: String): Boolean
 
     fun getAllPussiesFromFavorite(): LiveData<List<Pussy>>
 }

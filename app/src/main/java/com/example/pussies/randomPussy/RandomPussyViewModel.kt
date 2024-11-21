@@ -1,12 +1,13 @@
 package com.example.pussies.randomPussy
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
-import com.example.pussies.base.domain.usecases.GetPussyByIdUseCase
+import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ class RandomPussyViewModel @Inject constructor(
     private val loadOnePussyData: LoadOnePussyDataUseCase,
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
     private val deletePussyFromFavorite: DeletePussyFromFavoriteUseCase,
-    private val getPussy: GetPussyByIdUseCase
+    private val checkPussy: CheckPussyByIdUseCase
 ) : ViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
@@ -70,12 +71,14 @@ class RandomPussyViewModel @Inject constructor(
         }
     }
 
-//    fun checkFavorite() {
-//        viewModelScope.launch {
-//            val checkFavorite = withContext(Dispatchers.IO) {
-//                pussy.value?.id?.let { getPussy(it) }
-//            }
-//            _pussy.value?.isFavorite = checkFavorite != null
-//        }
-//    }
+    fun checkFavorite() {
+        viewModelScope.launch {
+            val checkFavorite = withContext(Dispatchers.IO) {
+                pussy.value?.id?.let { checkPussy(it) }
+            }
+            Log.d("Pussy", "checkFavorite: $checkFavorite")
+            _pussy.value?.isFavorite = checkFavorite?: false
+            Log.d("Pussy", "pussy after check ${pussy.value}")
+        }
+    }
 }

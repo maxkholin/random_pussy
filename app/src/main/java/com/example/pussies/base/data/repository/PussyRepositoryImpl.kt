@@ -1,8 +1,8 @@
 package com.example.pussies.base.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.pussies.base.data.database.PussyDbModel
 import com.example.pussies.base.data.database.PussyInfoDao
 import com.example.pussies.base.data.mapper.PussyMapper
 import com.example.pussies.base.data.network.ApiService
@@ -19,7 +19,8 @@ class PussyRepositoryImpl @Inject constructor(
     override suspend fun loadOnePussyData(): Pussy {
         val pussyData = apiService.loadPussyData()
         val pussyDto = pussyData.firstOrNull() ?: throw Exception("Empty response")
-        val isFavorite = pussyInfoDao.getPussyById(pussyDto.id).value != null
+        val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
+        Log.d("Pussy", "dao $isFavorite")
         return mapper.mapDtoToDomain(pussyDto, isFavorite)
     }
 
@@ -32,8 +33,8 @@ class PussyRepositoryImpl @Inject constructor(
         pussyInfoDao.deletePussy(pussyId)
     }
 
-    override fun getPussyById(pussyId: String): PussyDbModel? {
-        return pussyInfoDao.getPussyById(pussyId).value
+    override suspend fun checkPussyById(pussyId: String): Boolean {
+        return pussyInfoDao.getPussyById(pussyId) != null
     }
 
     override fun getAllPussiesFromFavorite(): LiveData<List<Pussy>> =
