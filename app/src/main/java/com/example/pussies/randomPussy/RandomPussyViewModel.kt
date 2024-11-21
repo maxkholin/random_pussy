@@ -3,11 +3,10 @@ package com.example.pussies.randomPussy
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
-import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
+import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
 import com.example.pussies.base.presentation.BaseViewModel
@@ -78,7 +77,7 @@ class RandomPussyViewModel @Inject constructor(
                 pussy.value?.id?.let { checkPussy(it) }
             }
             Log.d("Pussy", "checkFavorite: $checkFavorite")
-            _pussy.value?.isFavorite = checkFavorite?: false
+            _pussy.value?.isFavorite = checkFavorite ?: false
             Log.d("Pussy", "pussy after check ${pussy.value}")
         }
     }

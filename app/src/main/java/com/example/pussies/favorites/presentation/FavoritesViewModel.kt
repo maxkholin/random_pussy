@@ -1,7 +1,6 @@
 package com.example.pussies.favorites.presentation
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
