@@ -10,6 +10,8 @@ import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.PussyRepository
 import javax.inject.Inject
 
+private const val TAG = "Pussy RepositoryImpl"
+
 class PussyRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val pussyInfoDao: PussyInfoDao,
@@ -20,7 +22,7 @@ class PussyRepositoryImpl @Inject constructor(
         val pussyData = apiService.loadPussyData()
         val pussyDto = pussyData.firstOrNull() ?: throw Exception("Empty response")
         val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
-        Log.d("Pussy", "dao $isFavorite")
+        Log.d(TAG, "dao isFavorite: $isFavorite")
         return mapper.mapDtoToDomain(pussyDto, isFavorite)
     }
 
