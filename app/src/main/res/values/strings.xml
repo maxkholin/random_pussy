@@ -7,13 +7,12 @@
     <string name="random_pussy_image">Image of pussy</string>
     <string name="random_pussy_error_message">Невозможно загрузить данные, возможно отсутсвует подключение к интернету или сервер не отвечает. Попробуйте позже</string>
     <string name="random_pussy_sadness">Печаль</string>
-    <string name="random_pussy_add_remove_to_favorite">add/remove to favorite</string>
     <string name="random_pussy_favorites">Избранное</string>
-    <string name="to_home">To random pussy screen</string>
-    <string name="home_button">home button</string>
-    <string name="remove_from_favorite">remove from favorite</string>
+
+    <string name="card_pussy_remove_from_favorite">add/remove from favorite</string>
 
     <string name="favorites_title">Favorites</string>
+    <string name="favorites_back">Назад</string>
     <string name="favorites_empty_list">Избранное пусто. Лайкните понравившиеся изображения и они появятся здесь.</string>
 
     <string name="detailed_info_title">detailed info</string>
