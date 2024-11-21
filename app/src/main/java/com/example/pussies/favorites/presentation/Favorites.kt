@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.PussyApp
-import com.example.pussies.base.presentation.viewmodel.ViewModelFactory
+import com.example.pussies.base.presentation.ViewModelFactory
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
 import javax.inject.Inject
