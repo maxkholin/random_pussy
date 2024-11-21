@@ -9,13 +9,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.PussyApp
-import com.example.pussies.base.presentation.viewmodel.ViewModelFactory
+import com.example.pussies.base.presentation.ViewModelFactory
 import com.example.pussies.databinding.RandomPussyBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RandomPussy : Fragment() {
@@ -93,6 +96,7 @@ class RandomPussy : Fragment() {
     private fun observeViewModel() {
         observeLoading()
         observeErrors()
+        viewModel.checkFavorite()
         observePussyModel()
     }
 
@@ -136,16 +140,20 @@ class RandomPussy : Fragment() {
 
     private fun observePussyModel() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
-            with(binding.cardPussy) {
-                Log.d("Pussy", "in Observe")
-                pussyImage.load(pussy.imageUrl)
 
-                pussyBreed.text = pussy.breedName
+            lifecycleScope.launch {
+                delay(10)
+                with(binding.cardPussy) {
+                    Log.d("Pussy", "in Observe")
+                    pussyImage.load(pussy.imageUrl)
+                    pussyBreed.text = pussy.breedName
 
-                toggleFavorite.setImageResource(
-                    getButtonFavoriteImage(pussy.isFavorite)
-                )
+                    toggleFavorite.setImageResource(
+                        getButtonFavoriteImage(pussy.isFavorite)
+                    )
+                }
             }
+
             Log.d("Pussy", pussy.isFavorite.toString())
         }
     }
@@ -160,11 +168,6 @@ class RandomPussy : Fragment() {
             R.drawable.ic_non_active_heart
         }
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.checkFavorite()
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
