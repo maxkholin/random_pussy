@@ -5,26 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.domain.Pussy
+import com.example.pussies.base.presentation.BaseFragment
+import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
-import com.example.pussies.base.presentation.ViewModelFactory
 import com.example.pussies.databinding.DetailedInfoBinding
-import javax.inject.Inject
 
-class DetailedInfo : Fragment() {
+class DetailedInfo : BaseFragment() {
 
     private val args by navArgs<DetailedInfoArgs>()
 
+//    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: DetailedInfoViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     private val component by lazy {
         (requireActivity().application as PussyApp).appComponent
@@ -58,9 +55,8 @@ class DetailedInfo : Fragment() {
     }
 
     private fun initAndSetupViewModel(pussy: Pussy) {
-        viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[DetailedInfoViewModel::class]
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailedInfoViewModel::class]
+//        viewModel = baseViewModel as DetailedInfoViewModel
         viewModel.setPussy(pussy)
     }
 
@@ -176,12 +172,8 @@ class DetailedInfo : Fragment() {
 
     private fun setupButtonBack() {
         binding.back.setOnClickListener {
-            launchPastFragment()
+            findNavController().popBackStack()
         }
-    }
-
-    private fun launchPastFragment() {
-        findNavController().popBackStack()
     }
 
     override fun onDestroyView() {

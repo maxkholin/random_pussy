@@ -7,26 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
-import com.example.pussies.base.domain.Pussy
+import com.example.pussies.base.presentation.BaseFragment
+import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
-import com.example.pussies.base.presentation.ViewModelFactory
 import com.example.pussies.databinding.RandomPussyBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class RandomPussy : Fragment() {
+private const val TAG = "Pussy Random Pussy"
 
+class RandomPussy : BaseFragment() {
+
+//    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: RandomPussyViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     private val component by lazy {
         (requireActivity().application as PussyApp).appComponent
@@ -50,47 +48,16 @@ class RandomPussy : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        viewModel = ViewModelProvider(this, viewModelFactory)[RandomPussyViewModel::class.java]
+        initViewModel()
         observeViewModel()
-
         setupClickListeners()
     }
 
-    private fun setupClickListeners() {
-        with(binding) {
-            buttonLoadPussy.setOnClickListener {
-                viewModel.loadPussyData()
-            }
-
-            cardPussy.toggleFavorite.setOnClickListener {
-                viewModel.toggleFavoriteStatus()
-            }
-
-            favorites.setOnClickListener {
-                launchFavoriteFragment()
-            }
-
-            cardPussy.pussyImage.setOnClickListener {
-                viewModel.pussy.value.let {
-                    if (it != null) {
-                        launchDetailedInfoFragment(it)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun launchFavoriteFragment() {
-        findNavController().navigate(
-            RandomPussyDirections.toFavorites()
-        )
-    }
-
-    private fun launchDetailedInfoFragment(pussy: Pussy) {
-        findNavController().navigate(
-            RandomPussyDirections.toDetailedInfo(pussy)
-        )
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(
+            this, viewModelFactory
+        )[RandomPussyViewModel::class.java]
+//        viewModel = baseViewModel as RandomPussyViewModel
     }
 
     private fun observeViewModel() {
@@ -144,7 +111,6 @@ class RandomPussy : Fragment() {
             lifecycleScope.launch {
                 delay(10)
                 with(binding.cardPussy) {
-                    Log.d("Pussy", "in Observe")
                     pussyImage.load(pussy.imageUrl)
                     pussyBreed.text = pussy.breedName
 
@@ -153,8 +119,6 @@ class RandomPussy : Fragment() {
                     )
                 }
             }
-
-            Log.d("Pussy", pussy.isFavorite.toString())
         }
     }
 
@@ -166,6 +130,34 @@ class RandomPussy : Fragment() {
             R.drawable.ic_active_heart
         } else {
             R.drawable.ic_non_active_heart
+        }
+    }
+
+    private fun setupClickListeners() {
+        with(binding) {
+            buttonLoadPussy.setOnClickListener {
+                viewModel.loadPussyData()
+            }
+
+            cardPussy.toggleFavorite.setOnClickListener {
+                viewModel.toggleFavoriteStatus()
+            }
+
+            favorites.setOnClickListener {
+                Log.d(TAG, "favorite click")
+                findNavController()
+                    .navigate(RandomPussyDirections.toFavorites())
+            }
+
+            cardPussy.pussyImage.setOnClickListener {
+                viewModel.pussy.value.let { pussy ->
+                    if (pussy != null) {
+                        Log.d(TAG, "image click")
+                        findNavController()
+                            .navigate(RandomPussyDirections.toDetailedInfo(pussy))
+                    }
+                }
+            }
         }
     }
 

@@ -5,22 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pussies.base.domain.Pussy
+import com.example.pussies.base.presentation.BaseFragment
+import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
-import com.example.pussies.base.presentation.ViewModelFactory
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
-import javax.inject.Inject
 
-class Favorites : Fragment() {
+class Favorites : BaseFragment() {
 
+//    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: FavoritesViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     private val component by lazy {
         (requireActivity().application as PussyApp).appComponent
@@ -29,6 +26,8 @@ class Favorites : Fragment() {
     private var _binding: FavoritePussiesBinding? = null
     private val binding: FavoritePussiesBinding
         get() = _binding ?: throw RuntimeException("FragmentFavoritePussiesBinding = null")
+
+    private lateinit var adapter: PussyAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,19 +45,25 @@ class Favorites : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, viewModelFactory)[FavoritesViewModel::class]
-
-        val adapter = PussyAdapter(viewModel::removeFromFavorites, ::launchDetailedInfoFragment)
-        binding.favoritesRv.adapter = adapter
-
+        initViewModel()
+        setupAdapter()
         observeViewModel(adapter)
         setupButtonBack()
     }
 
-    private fun setupButtonBack() {
-        binding.back.setOnClickListener {
-            findNavController().popBackStack()
-        }
+    private fun setupAdapter() {
+        adapter = PussyAdapter(
+            viewModel::removeFromFavorites,
+            ::launchDetailedInfoFragment
+        )
+        binding.favoritesRv.adapter = adapter
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(
+            this, viewModelFactory
+        )[FavoritesViewModel::class]
+//        viewModel = baseViewModel as FavoritesViewModel
     }
 
     private fun observeViewModel(adapter: PussyAdapter) {
@@ -73,10 +78,13 @@ class Favorites : Fragment() {
     }
 
     private fun launchDetailedInfoFragment(pussy: Pussy) {
-        findNavController()
-            .navigate(
-                FavoritesDirections.toDetailedInfo(pussy)
-            )
+        findNavController().navigate(FavoritesDirections.toDetailedInfo(pussy))
+    }
+
+    private fun setupButtonBack() {
+        binding.back.setOnClickListener {
+           findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
