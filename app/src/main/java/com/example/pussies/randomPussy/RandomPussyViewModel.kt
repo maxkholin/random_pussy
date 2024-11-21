@@ -10,6 +10,7 @@ import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
+import com.example.pussies.base.presentation.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,7 +21,7 @@ class RandomPussyViewModel @Inject constructor(
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
     private val deletePussyFromFavorite: DeletePussyFromFavoriteUseCase,
     private val checkPussy: CheckPussyByIdUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
+import com.example.pussies.base.presentation.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class DetailedInfoViewModel @Inject constructor(
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
     private val deletePussyFromFavorite: DeletePussyFromFavoriteUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
