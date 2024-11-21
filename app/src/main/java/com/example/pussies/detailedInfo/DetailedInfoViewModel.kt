@@ -7,6 +7,7 @@ import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.presentation.BaseViewModel
+import com.example.pussies.base.presentation.model.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -49,5 +50,9 @@ class DetailedInfoViewModel @Inject constructor(
 
     fun toggleStats() {
         _statsIsOpen.value = _statsIsOpen.value?.not() ?: false
+    }
+
+    fun navigateBack() {
+        navigate.value = Navigation.Pop
     }
 }
