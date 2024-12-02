@@ -9,14 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
 
 class Favorites : BaseFragment() {
 
-//    override lateinit var baseViewModel: BaseViewModel
+    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: FavoritesViewModel
 
     private val component by lazy {
@@ -83,7 +82,7 @@ class Favorites : BaseFragment() {
 
     private fun setupButtonBack() {
         binding.back.setOnClickListener {
-           findNavController().popBackStack()
+            findNavController().popBackStack()
         }
     }
 

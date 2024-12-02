@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.RandomPussyBinding
 import kotlinx.coroutines.delay
@@ -23,7 +22,7 @@ private const val TAG = "Pussy Random Pussy"
 
 class RandomPussy : BaseFragment() {
 
-//    override lateinit var baseViewModel: BaseViewModel
+    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: RandomPussyViewModel
 
     private val component by lazy {

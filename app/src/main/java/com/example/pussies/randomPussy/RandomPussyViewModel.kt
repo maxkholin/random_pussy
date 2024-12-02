@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
