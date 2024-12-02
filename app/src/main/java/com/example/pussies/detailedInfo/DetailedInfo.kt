@@ -19,7 +19,6 @@ class DetailedInfo : BaseFragment() {
 
     private val args by navArgs<DetailedInfoArgs>()
 
-    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: DetailedInfoViewModel
 
     private val component by lazy {
@@ -55,7 +54,6 @@ class DetailedInfo : BaseFragment() {
 
     private fun initAndSetupViewModel(pussy: Pussy) {
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailedInfoViewModel::class]
-//        viewModel = baseViewModel as DetailedInfoViewModel
         viewModel.setPussy(pussy)
     }
 

@@ -22,7 +22,6 @@ private const val TAG = "Pussy Random Pussy"
 
 class RandomPussy : BaseFragment() {
 
-    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: RandomPussyViewModel
 
     private val component by lazy {

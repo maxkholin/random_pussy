@@ -15,7 +15,6 @@ import com.example.pussies.favorites.adapter.PussyAdapter
 
 class Favorites : BaseFragment() {
 
-    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: FavoritesViewModel
 
     private val component by lazy {

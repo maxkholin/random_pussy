@@ -3,14 +3,13 @@ package com.example.pussies.randomPussy
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
-import com.example.pussies.base.presentation.BaseViewModel
-import com.example.pussies.base.presentation.model.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +22,7 @@ class RandomPussyViewModel @Inject constructor(
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
     private val deletePussyFromFavorite: DeletePussyFromFavoriteUseCase,
     private val checkPussy: CheckPussyByIdUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
@@ -85,13 +84,4 @@ class RandomPussyViewModel @Inject constructor(
         }
     }
 
-    fun navigateToDetailedInfo(pussy: Pussy) {
-        val direction = RandomPussyDirections.toDetailedInfo(pussy)
-        navigate.value = Navigation.To(direction)
-    }
-
-    fun navigateToFavorites() {
-        val direction = RandomPussyDirections.toFavorites()
-        navigate.value = Navigation.To(direction)
-    }
 }

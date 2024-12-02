@@ -2,12 +2,11 @@ package com.example.pussies.detailedInfo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
-import com.example.pussies.base.presentation.BaseViewModel
-import com.example.pussies.base.presentation.model.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class DetailedInfoViewModel @Inject constructor(
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
     private val deletePussyFromFavorite: DeletePussyFromFavoriteUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _pussy = MutableLiveData<Pussy>()
     val pussy: LiveData<Pussy> = _pussy
@@ -50,9 +49,5 @@ class DetailedInfoViewModel @Inject constructor(
 
     fun toggleStats() {
         _statsIsOpen.value = _statsIsOpen.value?.not() ?: false
-    }
-
-    fun navigateBack() {
-        navigate.value = Navigation.Pop
     }
 }
