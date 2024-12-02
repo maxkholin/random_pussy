@@ -102,12 +102,10 @@ class RandomPussy : BaseFragment() {
 
     private fun observePussyModel() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
-
             lifecycleScope.launch {
                 delay(10)
                 with(binding.cardPussy) {
                     pussyImage.load(pussy.imageUrl)
-
                     toggleFavorite.setImageResource(
                         getButtonFavoriteImage(pussy.isFavorite)
                     )
