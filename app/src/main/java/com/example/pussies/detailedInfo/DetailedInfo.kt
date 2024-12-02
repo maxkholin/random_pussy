@@ -12,7 +12,6 @@ import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.BaseViewModel
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.DetailedInfoBinding
 
@@ -20,7 +19,7 @@ class DetailedInfo : BaseFragment() {
 
     private val args by navArgs<DetailedInfoArgs>()
 
-//    override lateinit var baseViewModel: BaseViewModel
+    //    override lateinit var baseViewModel: BaseViewModel
     private lateinit var viewModel: DetailedInfoViewModel
 
     private val component by lazy {
@@ -85,7 +84,7 @@ class DetailedInfo : BaseFragment() {
     private fun setupCharacteristic(pussy: Pussy) {
         with(binding) {
             cardPussy.pussyImage.load(pussy.imageUrl)
-            cardPussy.pussyBreed.text =
+            pussyBreed.text =
                 String.format(getString(R.string.detailed_info_breed_name_s), pussy.breedName)
             breedDescription.text = pussy.description
             weight.text = String.format(getString(R.string.detailed_info_weight_s), pussy.weight)

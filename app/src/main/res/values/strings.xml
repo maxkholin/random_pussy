@@ -19,7 +19,7 @@
     <string name="detailed_info_back">Назад</string>
     <string name="detailed_info_expand_more_less">expand more/less</string>
     <string name="detailed_info_pussy_description_example">The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and love both people and other animals.</string>
-    <string name="detailed_info_breed_name_s">Breed: %s</string>
+    <string name="detailed_info_breed_name_s">%s</string>
     <string name="detailed_info_characteristic">Characteristic</string>
     <string name="detailed_info_weight_s">Weight: %s</string>
     <string name="detailed_info_temperament_s">Temperament: %s</string>

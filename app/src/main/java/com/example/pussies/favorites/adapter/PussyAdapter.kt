@@ -27,7 +27,6 @@ class PussyAdapter(
         val pussy = getItem(position)
         with(holder.binding) {
             pussyImage.load(pussy.imageUrl)
-            pussyBreed.text = pussy.breedName
             toggleFavorite.setImageResource(R.drawable.ic_broken_heart)
             toggleFavorite.setOnClickListener {
                 onDeleteClick(pussy.id)

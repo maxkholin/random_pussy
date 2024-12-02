@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="cardHeight">480dp</dimen>
+    <dimen name="cardHeight">400dp</dimen>
     <dimen name="cardElevation">8dp</dimen>
     <dimen name="heartMarginEnd">16dp</dimen>
     <dimen name="iconsDimensions">40dp</dimen>
@@ -17,4 +17,5 @@
     <dimen name="favoritesRvHorizontalMargin">4dp</dimen>
     <dimen name="favoritesRvTopMargin">76dp</dimen>
     <dimen name="emptyFavoritesPadding">8dp</dimen>
+    <dimen name="breed_margin_vert">8dp</dimen>
 </resources>

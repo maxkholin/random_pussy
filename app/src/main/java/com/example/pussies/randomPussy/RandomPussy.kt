@@ -84,7 +84,6 @@ class RandomPussy : BaseFragment() {
             if (isError) {
                 with(binding.cardPussy) {
                     pussyImage.setImageResource(R.drawable.error_pussy)
-                    pussyBreed.text = getString(R.string.random_pussy_sadness)
                     toggleFavorite.setImageResource(R.drawable.ic_non_active_heart)
                 }
                 showAlertDialog()
@@ -112,7 +111,6 @@ class RandomPussy : BaseFragment() {
                 delay(10)
                 with(binding.cardPussy) {
                     pussyImage.load(pussy.imageUrl)
-                    pussyBreed.text = pussy.breedName
 
                     toggleFavorite.setImageResource(
                         getButtonFavoriteImage(pussy.isFavorite)
