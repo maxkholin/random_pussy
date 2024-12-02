@@ -2,7 +2,7 @@ package com.example.pussies.base.di
 
 import android.app.Application
 import com.example.pussies.detailedInfo.DetailedInfo
-import com.example.pussies.favorites.presentation.Favorites
+import com.example.pussies.favorites.Favorites
 import com.example.pussies.randomPussy.RandomPussy
 import dagger.BindsInstance
 import dagger.Component

@@ -1,4 +1,4 @@
-package com.example.pussies.favorites.presentation
+package com.example.pussies.favorites
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.example.pussies.base.presentation.BaseFragment
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
+import com.example.pussies.favorites.presentation.FavoritesDirections
 
 class Favorites : BaseFragment() {
 

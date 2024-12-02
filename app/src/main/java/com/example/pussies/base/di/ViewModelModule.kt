@@ -2,7 +2,7 @@ package com.example.pussies.base.di
 
 import androidx.lifecycle.ViewModel
 import com.example.pussies.detailedInfo.DetailedInfoViewModel
-import com.example.pussies.favorites.presentation.FavoritesViewModel
+import com.example.pussies.favorites.FavoritesViewModel
 import com.example.pussies.randomPussy.RandomPussyViewModel
 import dagger.Binds
 import dagger.Module

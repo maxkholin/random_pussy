@@ -1,4 +1,4 @@
-package com.example.pussies.favorites.presentation
+package com.example.pussies.favorites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/favorites"
-        android:name="com.example.pussies.favorites.presentation.Favorites"
+        android:name="com.example.pussies.favorites.Favorites"
         android:label="fragment_favorite_pussies"
         tools:layout="@layout/favorite_pussies">
         <action
