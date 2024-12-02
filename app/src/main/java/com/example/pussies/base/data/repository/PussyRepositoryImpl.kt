@@ -19,11 +19,14 @@ class PussyRepositoryImpl @Inject constructor(
 ) : PussyRepository {
 
     override suspend fun loadOnePussyData(): Pussy {
-        val pussyData = apiService.loadPussyData()
-        val pussyDto = pussyData.firstOrNull() ?: throw Exception("Empty response")
-        val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
-        Log.d(TAG, "dao isFavorite: $isFavorite")
-        return mapper.mapDtoToDomain(pussyDto, isFavorite)
+        return try {
+            val pussyData = apiService.loadPussyData()
+            val pussyDto = pussyData.first()
+            val isFavorite = pussyInfoDao.getPussyById(pussyDto.id) != null
+            mapper.mapDtoToDomain(pussyDto, isFavorite)
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
     override suspend fun insertPussyToFavorite(pussy: Pussy) {
