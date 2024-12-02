@@ -1,6 +1,5 @@
 package com.example.pussies.randomPussy
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +9,7 @@ import com.example.pussies.base.domain.usecases.CheckPussyByIdUseCase
 import com.example.pussies.base.domain.usecases.DeletePussyFromFavoriteUseCase
 import com.example.pussies.base.domain.usecases.InsertPussyToFavoriteUseCase
 import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val TAG = "Pussy Random Pussy VM"
@@ -41,9 +38,7 @@ class RandomPussyViewModel @Inject constructor(
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val pussy = withContext(Dispatchers.IO) {
-                    loadOnePussyData()
-                }
+                val pussy = loadOnePussyData()
                 _pussy.value = pussy
             } catch (e: Exception) {
                 _isError.value = true
@@ -59,29 +54,24 @@ class RandomPussyViewModel @Inject constructor(
 
     fun toggleFavoriteStatus() {
         viewModelScope.launch {
-            val currentStatus = pussy.value?.isFavorite
-            if (currentStatus != null) {
-                withContext(Dispatchers.IO) {
-                    if (currentStatus == false) {
-                        pussy.value?.let { insertPussyToFavorite(it) }
-                    } else {
-                        pussy.value?.id?.let { deletePussyFromFavorite(it) }
-                    }
-                }
-                _pussy.value = pussy.value?.copy(isFavorite = !currentStatus)
+            pussy.value?.let {
+                val currentStatus = it.isFavorite
+                if (!currentStatus)
+                    insertPussyToFavorite(it)
+                else
+                    deletePussyFromFavorite(it.id)
+
+                _pussy.value = it.copy(isFavorite = !currentStatus)
             }
         }
     }
 
     fun checkFavorite() {
         viewModelScope.launch {
-            val checkFavorite = withContext(Dispatchers.IO) {
-                pussy.value?.id?.let { checkPussy(it) }
+            pussy.value?.let {
+                val checkFavorite = checkPussy(it.id)
+                _pussy.value?.isFavorite = checkFavorite
             }
-            Log.d(TAG, "checkFavorite: $checkFavorite")
-            _pussy.value?.isFavorite = checkFavorite ?: false
-            Log.d(TAG, "pussy after check: ${pussy.value.toString()}")
         }
     }
-
 }
