@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Pussies"
         tools:targetApi="31">
         <activity
-            android:name=".base.presentation.MainActivity"
+            android:name=".base.presentation.BaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

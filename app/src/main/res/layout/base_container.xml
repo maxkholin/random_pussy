@@ -2,14 +2,14 @@
 <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_container"
+    android:id="@+id/base_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:name="androidx.navigation.fragment.NavHostFragment"
     app:navGraph="@navigation/main_navigation"
     app:defaultNavHost="true"
-    tools:context=".base.presentation.MainActivity">
+    tools:context=".base.presentation.BaseActivity">
 
 
 </androidx.fragment.app.FragmentContainerView>
