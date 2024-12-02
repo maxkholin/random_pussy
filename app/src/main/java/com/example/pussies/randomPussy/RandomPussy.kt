@@ -63,7 +63,6 @@ class RandomPussy : BaseFragment() {
     private fun observeViewModel() {
         observeLoading()
         observeErrors()
-        viewModel.checkFavorite()
         observePussyModel()
     }
 
@@ -157,6 +156,11 @@ class RandomPussy : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkFavorite()
     }
 
     override fun onDestroyView() {
