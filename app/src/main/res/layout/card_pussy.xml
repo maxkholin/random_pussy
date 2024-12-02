@@ -28,6 +28,7 @@
             android:layout_width="@dimen/iconsDimensions"
             android:layout_height="@dimen/iconsDimensions"
             android:layout_marginEnd="@dimen/heartMarginEnd"
+            android:layout_marginTop="@dimen/heartMarginTop"
             android:contentDescription="@string/card_pussy_remove_from_favorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
