@@ -12,8 +12,6 @@ import com.example.pussies.base.domain.usecases.LoadOnePussyDataUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "Pussy Random Pussy VM"
-
 class RandomPussyViewModel @Inject constructor(
     private val loadOnePussyData: LoadOnePussyDataUseCase,
     private val insertPussyToFavorite: InsertPussyToFavoriteUseCase,
