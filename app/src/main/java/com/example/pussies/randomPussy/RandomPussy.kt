@@ -55,7 +55,6 @@ class RandomPussy : BaseFragment() {
         viewModel = ViewModelProvider(
             this, viewModelFactory
         )[RandomPussyViewModel::class.java]
-//        viewModel = baseViewModel as RandomPussyViewModel
     }
 
     private fun observeViewModel() {

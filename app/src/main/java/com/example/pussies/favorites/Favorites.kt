@@ -12,7 +12,6 @@ import com.example.pussies.base.presentation.BaseFragment
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
-import com.example.pussies.favorites.presentation.FavoritesDirections
 
 class Favorites : BaseFragment() {
 
@@ -62,7 +61,6 @@ class Favorites : BaseFragment() {
         viewModel = ViewModelProvider(
             this, viewModelFactory
         )[FavoritesViewModel::class]
-//        viewModel = baseViewModel as FavoritesViewModel
     }
 
     private fun observeViewModel(adapter: PussyAdapter) {
