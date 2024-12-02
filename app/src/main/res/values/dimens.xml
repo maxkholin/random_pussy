@@ -3,6 +3,7 @@
     <dimen name="cardHeight">400dp</dimen>
     <dimen name="cardElevation">8dp</dimen>
     <dimen name="heartMarginEnd">16dp</dimen>
+    <dimen name="heartMarginTop">16dp</dimen>
     <dimen name="iconsDimensions">40dp</dimen>
     <dimen name="topBarHeight">72dp</dimen>
     <dimen name="iconsMargin">16dp</dimen>

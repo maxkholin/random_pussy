@@ -63,7 +63,7 @@ class DetailedInfo : BaseFragment() {
         viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
             setupCharacteristic(pussy)
 
-            binding.cardPussy.toggleFavorite.setImageResource(
+            binding.toggleFavorite.setImageResource(
                 getToggleFavoriteImage(pussy.isFavorite)
             )
         }
@@ -83,7 +83,7 @@ class DetailedInfo : BaseFragment() {
 
     private fun setupCharacteristic(pussy: Pussy) {
         with(binding) {
-            cardPussy.pussyImage.load(pussy.imageUrl)
+            pussyImage.load(pussy.imageUrl)
             pussyBreed.text =
                 String.format(getString(R.string.detailed_info_breed_name_s), pussy.breedName)
             breedDescription.text = pussy.description
@@ -164,7 +164,7 @@ class DetailedInfo : BaseFragment() {
     }
 
     private fun setupToggleFavorite() {
-        binding.cardPussy.toggleFavorite.setOnClickListener {
+        binding.toggleFavorite.setOnClickListener {
             viewModel.toggleFavoriteStatus()
         }
     }

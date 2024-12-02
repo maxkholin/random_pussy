@@ -49,12 +49,32 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/LLHorizontalPadding">
 
-            <include
-                android:id="@+id/cardPussy"
-                layout="@layout/card_pussy"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/cardVerticalMargin" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/pussyImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/error_pussy" />
+
+                <ImageView
+                    android:id="@+id/toggleFavorite"
+                    android:layout_width="@dimen/iconsDimensions"
+                    android:layout_height="@dimen/iconsDimensions"
+                    android:layout_marginEnd="@dimen/heartMarginEnd"
+                    android:contentDescription="@string/card_pussy_remove_from_favorite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_non_active_heart" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/pussy_breed"
