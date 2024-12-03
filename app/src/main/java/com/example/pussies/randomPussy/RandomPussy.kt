@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.pussies.R
+import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
 import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.RandomPussyBinding
@@ -58,35 +59,47 @@ class RandomPussy : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        observeLoading()
-        observeErrors()
-        observePussyModel()
-    }
-
-    private fun observeLoading() {
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                binding.skeletonLayout.showSkeleton()
-                binding.buttonLoadPussy.isEnabled = false
-            } else {
-                binding.skeletonLayout.showOriginal()
-                binding.buttonLoadPussy.isEnabled = true
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is Loading -> showLoading()
+                is Error -> showError()
+                is Success -> updateUI(state.pussy)
             }
         }
     }
 
-    private fun observeErrors() {
-        viewModel.isError.observe(viewLifecycleOwner) { isError ->
-            if (isError) {
-                with(binding.cardPussy) {
-                    pussyImage.setImageResource(R.drawable.error_pussy)
-                    toggleFavorite.setImageResource(R.drawable.ic_non_active_heart)
-                }
-                showAlertDialog()
-            }
+    private fun updateUI(pussy: Pussy) {
+        hideLoading()
 
-            viewModel.resetError()
+        lifecycleScope.launch {
+            delay(10)
+            with(binding.cardPussy) {
+                pussyImage.load(pussy.imageUrl)
+                toggleFavorite.setImageResource(
+                    getButtonFavoriteImage(pussy.isFavorite)
+                )
+            }
         }
+    }
+
+    private fun showError() {
+        hideLoading()
+
+        with(binding.cardPussy) {
+            pussyImage.setImageResource(R.drawable.error_pussy)
+            toggleFavorite.setImageResource(R.drawable.ic_non_active_heart)
+        }
+        showAlertDialog()
+    }
+
+    private fun hideLoading() {
+        binding.skeletonLayout.showOriginal()
+        binding.buttonLoadPussy.isEnabled = true
+    }
+
+    private fun showLoading() {
+        binding.skeletonLayout.showSkeleton()
+        binding.buttonLoadPussy.isEnabled = false
     }
 
     private fun showAlertDialog() {
@@ -98,20 +111,6 @@ class RandomPussy : BaseFragment() {
             }
             .create()
             .show()
-    }
-
-    private fun observePussyModel() {
-        viewModel.pussy.observe(viewLifecycleOwner) { pussy ->
-            lifecycleScope.launch {
-                delay(10)
-                with(binding.cardPussy) {
-                    pussyImage.load(pussy.imageUrl)
-                    toggleFavorite.setImageResource(
-                        getButtonFavoriteImage(pussy.isFavorite)
-                    )
-                }
-            }
-        }
     }
 
     /**
@@ -142,12 +141,10 @@ class RandomPussy : BaseFragment() {
             }
 
             cardPussy.pussyImage.setOnClickListener {
-                viewModel.pussy.value.let { pussy ->
-                    if (pussy != null) {
-                        Log.d(TAG, "image click")
-                        findNavController()
-                            .navigate(RandomPussyDirections.toDetailedInfo(pussy))
-                    }
+                val state = viewModel.state.value
+                if (state is Success) {
+                    findNavController()
+                        .navigate(RandomPussyDirections.toDetailedInfo(state.pussy))
                 }
             }
         }
