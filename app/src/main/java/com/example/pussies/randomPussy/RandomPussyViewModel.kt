@@ -19,14 +19,8 @@ class RandomPussyViewModel @Inject constructor(
     private val checkPussy: CheckPussyByIdUseCase
 ) : ViewModel() {
 
-    private val _pussy = MutableLiveData<Pussy>()
-    val pussy: LiveData<Pussy> = _pussy
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _isError = MutableLiveData<Boolean>()
-    val isError: LiveData<Boolean> = _isError
+    private val _state = MutableLiveData<PussyState>()
+    val state: LiveData<PussyState> = _state
 
     init {
         loadPussyData()
@@ -34,42 +28,41 @@ class RandomPussyViewModel @Inject constructor(
 
     fun loadPussyData() {
         viewModelScope.launch {
-            _isLoading.value = true
+            _state.value = Loading
             try {
                 val pussy = loadOnePussyData()
-                _pussy.value = pussy
+                _state.value = Success(pussy)
             } catch (e: Exception) {
-                _isError.value = true
-            } finally {
-                _isLoading.value = false
+                _state.value = Error("Failed to load data")
             }
         }
     }
 
-    fun resetError() {
-        _isError.value = false
-    }
-
     fun toggleFavoriteStatus() {
         viewModelScope.launch {
-            pussy.value?.let {
-                val currentStatus = it.isFavorite
-                if (!currentStatus)
-                    insertPussyToFavorite(it)
-                else
-                    deletePussyFromFavorite(it.id)
+            val currentState = state.value
+            if (currentState is Success) {
+                val pussy = currentState.pussy
+                val currentStatus = pussy.isFavorite
+                if (!currentStatus) {
+                    insertPussyToFavorite(pussy)
+                } else {
+                    deletePussyFromFavorite(pussyId = pussy.id)
+                }
 
-                _pussy.value = it.copy(isFavorite = !currentStatus)
+                _state.value = Success(pussy.copy(isFavorite = !currentStatus))
             }
         }
     }
 
     fun checkFavorite() {
         viewModelScope.launch {
-            pussy.value?.let {
-                val checkFavorite = checkPussy(it.id)
-                _pussy.value?.isFavorite = checkFavorite
+            val currentState = _state.value
+            if (currentState is Success) {
+                val checkFavorite = checkPussy(currentState.pussy.id)
+                _state.value = Success(currentState.pussy.copy(isFavorite = checkFavorite))
             }
         }
     }
+
 }
