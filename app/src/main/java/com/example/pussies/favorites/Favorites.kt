@@ -1,6 +1,5 @@
 package com.example.pussies.favorites
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.FavoritePussiesBinding
 import com.example.pussies.favorites.adapter.PussyAdapter
 
