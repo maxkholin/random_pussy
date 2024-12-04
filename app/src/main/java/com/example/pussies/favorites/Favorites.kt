@@ -17,20 +17,11 @@ class Favorites : BaseFragment() {
 
     private lateinit var viewModel: FavoritesViewModel
 
-    private val component by lazy {
-        (requireActivity().application as PussyApp).appComponent
-    }
-
     private var _binding: FavoritePussiesBinding? = null
     private val binding: FavoritePussiesBinding
         get() = _binding ?: throw RuntimeException("FragmentFavoritePussiesBinding = null")
 
     private lateinit var adapter: PussyAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        component.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

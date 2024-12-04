@@ -1,6 +1,5 @@
 package com.example.pussies.randomPussy
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.RandomPussyBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -25,18 +23,9 @@ class RandomPussy : BaseFragment() {
 
     private lateinit var viewModel: RandomPussyViewModel
 
-    private val component by lazy {
-        (requireActivity().application as PussyApp).appComponent
-    }
-
     private var _binding: RandomPussyBinding? = null
     private val binding: RandomPussyBinding
         get() = _binding ?: throw RuntimeException("FragmentRandomPussyBinding is null")
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        component.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,6 +1,5 @@
 package com.example.pussies.detailedInfo
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import coil.load
 import com.example.pussies.R
 import com.example.pussies.base.domain.Pussy
 import com.example.pussies.base.presentation.BaseFragment
-import com.example.pussies.base.presentation.PussyApp
 import com.example.pussies.databinding.DetailedInfoBinding
 
 class DetailedInfo : BaseFragment() {
@@ -21,18 +19,9 @@ class DetailedInfo : BaseFragment() {
 
     private lateinit var viewModel: DetailedInfoViewModel
 
-    private val component by lazy {
-        (requireActivity().application as PussyApp).appComponent
-    }
-
     private var _binding: DetailedInfoBinding? = null
     private val binding: DetailedInfoBinding
         get() = _binding ?: throw RuntimeException("FragmentDetailedInfoBinding = null")
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        component.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +59,7 @@ class DetailedInfo : BaseFragment() {
             binding.statsLinearLayout.visibility = if (isOpen) {
                 View.VISIBLE
             } else {
-                View.INVISIBLE
+                View.GONE
             }
 
             binding.stats.setCompoundDrawablesWithIntrinsicBounds(
