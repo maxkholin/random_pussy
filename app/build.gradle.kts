@@ -67,7 +67,10 @@ dependencies {
 
     implementation (libs.skeletonlayout)
 
-    testImplementation(libs.junit)
+    testImplementation (libs.junit)
+    testImplementation (libs.mockk)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.androidx.core.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
